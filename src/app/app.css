@@ -1,24 +1,19 @@
-ul {
-  display: flex;
-  flex-direction: row;
-}
-
-/* FUERZA BOOTSTRAP - Override navbar-nav horizontal SIEMPRE */
+/* Nav fusionado en header: forzar layout horizontal siempre */
+.nav-items-container.navbar-expand-lg .navbar-nav,
 .nav-items-container .navbar-nav,
-.nav-items-container ul.navbar-nav,
-header .nav-items-container .navbar-nav,
-.header-blur .nav-items-container .navbar-nav {
-  flex-direction: row !important;
+.header-blur .nav-items-container ul.navbar-nav {
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-/* Override Bootstrap responsive */
-@media (max-width: 992px) {
-  .nav-items-container .navbar-nav,
-  .nav-items-container ul.navbar-nav,
-  header .nav-items-container .navbar-nav,
-  .header-blur .nav-items-container .navbar-nav {
-    flex-direction: row !important;
-    display: flex !important;
-  }
+.nav-items-container .nav-item {
+  display: flex !important;
+  flex-direction: row !important;
+  white-space: nowrap;
 }

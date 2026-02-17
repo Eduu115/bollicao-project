@@ -32,9 +32,10 @@ export class Hero implements OnInit, OnDestroy {
 
     const scrollY = window.scrollY;
     const heroHeight = window.innerHeight;
+    const headerHeight = header.getBoundingClientRect().height;
     
-    // Cuando el scroll supera el 80% del hero, mover nav al header
-    if (scrollY > heroHeight * 0.8) {
+    // Fusionar cuando el navbar toca/se solapa con el header (posición de contacto)
+    if (scrollY >= heroHeight - headerHeight) {
       if (navbar.style.display !== 'none') {
         this.moveNavItemsToHeader(navbar, header);
         navbar.style.display = 'none';
@@ -53,9 +54,12 @@ export class Hero implements OnInit, OnDestroy {
     if (navContent && !header.querySelector('.nav-items-container')) {
       const container = this.renderer.createElement('div');
       this.renderer.addClass(container, 'nav-items-container');
+      this.renderer.addClass(container, 'navbar-expand-lg'); // Bootstrap aplica row al navbar-nav
       
-      // Clonar todos los items del navbar
       const clonedNav = navContent.cloneNode(true) as HTMLElement;
+      this.renderer.addClass(clonedNav, 'd-flex');
+      this.renderer.addClass(clonedNav, 'flex-row');
+      this.renderer.setStyle(clonedNav, 'flexDirection', 'row');
       this.renderer.appendChild(container, clonedNav);
       
       // Insertar entre el logo y el carrito

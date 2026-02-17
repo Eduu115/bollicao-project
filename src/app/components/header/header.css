@@ -53,41 +53,39 @@
   font-size: 1.2rem;
 }
 
-/* Contenedor de items del navbar en el header */
+/* Contenedor de items del navbar fusionado en header - SIEMPRE HORIZONTAL */
 .nav-items-container {
   flex: 1;
-  display: flex;
+  display: flex !important;
   justify-content: center;
-  flex-direction: row;
+  flex-direction: row !important;
   align-items: center;
+  flex-wrap: nowrap !important;
   z-index: 1001;
   max-width: 600px;
   height: 100%;
+  min-width: 0;
 }
 
-/* Override Bootstrap navbar-nav - MÁXIMA PRIORIDAD */
 .nav-items-container .navbar-nav,
-.nav-items-container ul.navbar-nav,
-header .nav-items-container .navbar-nav {
+.nav-items-container ul.navbar-nav {
   display: flex !important;
   flex-direction: row !important;
+  flex-wrap: nowrap !important;
   gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
-  flex-wrap: nowrap;
   align-items: center;
   height: 100%;
 }
 
-/* Override Bootstrap nav-item */
 .nav-items-container .nav-item,
-.nav-items-container li.nav-item,
-header .nav-items-container .nav-item {
-  white-space: nowrap;
-  display: flex;
-  flex-direction: row;
+.nav-items-container li.nav-item {
+  display: flex !important;
+  flex-direction: row !important;
   align-items: center;
+  white-space: nowrap;
   height: 100%;
 }
 
@@ -133,27 +131,17 @@ header .nav-items-container .nav-link {
   color: #8B5E3C;
 }
 
-/* Responsive */
+/* Responsive - mantener row siempre */
 @media (max-width: 768px) {
-  .header-blur {
-    height: 80px;
-  }
-  
   .nav-items-container {
-    flex: 1;
-    flex-direction: row;
     max-width: none;
     overflow-x: auto;
-    position: static;
-    background: transparent;
-    padding: 0;
+    -webkit-overflow-scrolling: touch;
   }
   
   .nav-items-container .navbar-nav {
     gap: 0.5rem;
-    flex-wrap: nowrap;
     overflow-x: auto;
-    justify-content: flex-start;
     flex-direction: row !important;
     display: flex !important;
   }
@@ -161,6 +149,5 @@ header .nav-items-container .nav-link {
   .nav-items-container .nav-link {
     padding: 0.3rem 0.8rem;
     font-size: 0.9rem;
-    white-space: nowrap;
   }
 }
