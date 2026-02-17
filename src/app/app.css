@@ -1,0 +1,19 @@
+/* Nav fusionado en header: forzar layout horizontal siempre */
+.nav-items-container.navbar-expand-lg .navbar-nav,
+.nav-items-container .navbar-nav,
+.header-blur .nav-items-container ul.navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-items-container .nav-item {
+  display: flex !important;
+  flex-direction: row !important;
+  white-space: nowrap;
+}
