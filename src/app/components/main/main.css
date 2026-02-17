@@ -15,7 +15,7 @@
 .main-pasteleria {
   min-height: 90vh;
   background: linear-gradient(120deg, #ebc9d7, #F8C8DC);
-  padding: 120px 0 80px 0; /* espacio para navbar fixed */
+  padding: 120px 0 80px 0;
 }
 
 .titulo-pastel {
