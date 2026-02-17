@@ -1,0 +1,52 @@
+/* 🎂 Fondo estilo crema + rosa */
+.navbar-pasteleria {
+  background: linear-gradient(90deg, #FFF4E6, #F8C8DC);
+  position: relative;
+  z-index: 10;
+  margin-top: -80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-pasteleria .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 🍫 Links */
+.navbar-pasteleria .nav-link {
+  color: #8B5E3C !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-pasteleria .nav-link:hover {
+  color: #D4A373 !important;
+  transform: translateY(-2px);
+}
+
+/* 🌸 Activo */
+.navbar-pasteleria .nav-link.active {
+  color: #D4A373 !important;
+}
+
+.navbar-pasteleria .dropdown-menu {
+  background-color: #FFF4E6;
+}
+
+.navbar-pasteleria .dropdown-item {
+  color: #8B5E3C;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+
+.navbar-pasteleria .dropdown-item:hover {
+  background-color: #F8C8DC;
+  color: white;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}

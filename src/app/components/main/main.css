@@ -1,11 +1,3 @@
-.hero {
-    height: 100vh;
-    background-image: url("/img/fotico.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-  
 .page{
     background: #fff;
     min-height: 100vh;
@@ -16,6 +8,8 @@
   min-height: 90vh;
   background: linear-gradient(120deg, #ebc9d7, #F8C8DC);
   padding: 120px 0 80px 0;
+  position: relative;
+  z-index: 10;
 }
 
 .titulo-pastel {

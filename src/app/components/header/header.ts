@@ -14,8 +14,8 @@ export class Header {
   scrolled = false;
 
   @HostListener('window:scroll')
-  onScroll() {
-    this.scrolled = window.scrollY > 40; // ajusta el umbral
+  onScroll() { // esto es el umbral de 
+    this.scrolled = window.scrollY > 40;
   }
 
 }

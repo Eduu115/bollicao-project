@@ -1,0 +1,24 @@
+ul {
+  display: flex;
+  flex-direction: row;
+}
+
+/* FUERZA BOOTSTRAP - Override navbar-nav horizontal SIEMPRE */
+.nav-items-container .navbar-nav,
+.nav-items-container ul.navbar-nav,
+header .nav-items-container .navbar-nav,
+.header-blur .nav-items-container .navbar-nav {
+  flex-direction: row !important;
+  display: flex !important;
+}
+
+/* Override Bootstrap responsive */
+@media (max-width: 992px) {
+  .nav-items-container .navbar-nav,
+  .nav-items-container ul.navbar-nav,
+  header .nav-items-container .navbar-nav,
+  .header-blur .nav-items-container .navbar-nav {
+    flex-direction: row !important;
+    display: flex !important;
+  }
+}

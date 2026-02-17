@@ -1,54 +1,166 @@
-/* 🎂 Fondo estilo crema + rosa */
-.navbar-pasteleria {
-  background: linear-gradient(90deg, #FFF4E6, #F8C8DC);
+/* Header translúcido con efecto blur */
+.header-blur {
+  background: rgba(255, 244, 230, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  height: 80px;
 }
 
-/* 🍫 Links */
-.navbar-pasteleria .nav-link {
+.header-blur .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+/* Logo */
+.header-blur .navbar-brand {
   color: #8B5E3C !important;
-  transition: all 0.3s ease;
+  text-decoration: none;
+  transition: transform 0.3s ease;
 }
 
-.navbar-pasteleria .nav-link:hover {
-  color: #D4A373 !important;
+.header-blur .navbar-brand:hover {
+  transform: scale(1.05);
+}
+
+/* Carrito minimalista con círculo */
+.carrito-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(230, 214, 245, 0.9);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.carrito-circle:hover {
+  background: rgba(248, 200, 220, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.carrito-circle i {
+  color: #8B5E3C;
+  font-size: 1.2rem;
+}
+
+/* Contenedor de items del navbar en el header */
+.nav-items-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  z-index: 1001;
+  max-width: 600px;
+  height: 100%;
+}
+
+/* Override Bootstrap navbar-nav - MÁXIMA PRIORIDAD */
+.nav-items-container .navbar-nav,
+.nav-items-container ul.navbar-nav,
+header .nav-items-container .navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+  align-items: center;
+  height: 100%;
+}
+
+/* Override Bootstrap nav-item */
+.nav-items-container .nav-item,
+.nav-items-container li.nav-item,
+header .nav-items-container .nav-item {
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+}
+
+/* Override Bootstrap nav-link */
+.nav-items-container .nav-link,
+.nav-items-container a.nav-link,
+header .nav-items-container .nav-link {
+  color: #8B5E3C !important;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: auto;
+}
+
+.nav-items-container .nav-link:hover {
+  background: rgba(248, 200, 220, 0.3);
   transform: translateY(-2px);
 }
 
-/* 🌸 Activo */
-.navbar-pasteleria .nav-link.active {
-  color: #D4A373 !important;
+.nav-items-container .nav-link.active {
+  background: rgba(248, 200, 220, 0.5);
 }
 
-
-.navbar-pasteleria .dropdown-menu {
-  background-color: #FFF4E6;
+/* Dropdown en header */
+.nav-items-container .dropdown-menu {
+  background: rgba(255, 244, 230, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.navbar-pasteleria .dropdown-item {
+.nav-items-container .dropdown-item {
   color: #8B5E3C;
-  border-radius: 10px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
-.navbar-pasteleria .dropdown-item:hover {
-  background-color: #F8C8DC;
-  color: white;
-}
-
-
-.carrito-pastel {
-  background-color: #E6D6F5;
+.nav-items-container .dropdown-item:hover {
+  background: rgba(248, 200, 220, 0.3);
   color: #8B5E3C;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: 0.3s ease;
 }
 
-.carrito-pastel:hover {
-  background-color: #F8C8DC;
-  cursor: pointer;
-}
-
-
-.navbar-toggler:focus {
-  box-shadow: none;
+/* Responsive */
+@media (max-width: 768px) {
+  .header-blur {
+    height: 80px;
+  }
+  
+  .nav-items-container {
+    flex: 1;
+    flex-direction: row;
+    max-width: none;
+    overflow-x: auto;
+    position: static;
+    background: transparent;
+    padding: 0;
+  }
+  
+  .nav-items-container .navbar-nav {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    flex-direction: row !important;
+    display: flex !important;
+  }
+  
+  .nav-items-container .nav-link {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
 }
