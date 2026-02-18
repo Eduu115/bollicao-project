@@ -1,5 +1,36 @@
+/* ===== PALETA OSCURA CON ROSAS ===== */
+:root {
+    /* Fondos oscuros */
+    --bg-dark: #1a0d14;
+    --bg-dark-2: #2d1520;
+    --bg-dark-3: #3d1e2c;
+    --bg-card: #261018;
+
+    /* Rosas pastel */
+    --rosa-pastel: #f4b8d0;
+    --rosa-pastel-2: #f9d4e4;
+    --rosa-pastel-3: #fce8f0;
+
+    /* Rosas fuertes (contraste) */
+    --rosa-fuerte: #e8427a;
+    --rosa-medio: #d4688e;
+    --rosa-oscuro: #b03060;
+
+    /* Textos */
+    --text-light: #fce8f0;
+    --text-muted: #c9a0b4;
+    --text-accent: #f4b8d0;
+
+    /* Bordes y sombras */
+    --border-rosa: rgba(232, 66, 122, 0.3);
+    --border-pastel: rgba(244, 184, 208, 0.25);
+    --shadow-rosa: rgba(232, 66, 122, 0.25);
+}
+
 html,
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
 }

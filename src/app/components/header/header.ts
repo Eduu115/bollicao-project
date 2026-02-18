@@ -1,4 +1,4 @@
-import { Component, HostListener  } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -14,8 +14,8 @@ export class Header {
   scrolled = false;
 
   @HostListener('window:scroll')
-  onScroll() { // esto es el umbral de 
-    this.scrolled = window.scrollY > 40;
+  onScroll() { // esto es el umbral del scroll, cuando el usuario baja mas de este numero de px el header cambia
+    this.scrolled = window.scrollY > 350;
   }
 
 }
