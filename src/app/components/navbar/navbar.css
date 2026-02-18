@@ -1,14 +1,16 @@
-/* 🌹 Navbar oscuro con gradiente rosa */
+/* 🌹 Navbar oscuro — se fusiona visualmente con el header flotante */
 .navbar-pasteleria {
   background: linear-gradient(90deg, #2d1520, #3d1e2c);
   border-bottom: 1px solid rgba(232, 66, 122, 0.3);
   position: relative;
   z-index: 10;
-  /* Compensa: top(16px) + height(70px) del header flotante = 86px */
+  /* El header flotante ocupa: top(16px) + height(70px) = 86px desde arriba.
+     El navbar sube ese mismo valor para quedar justo debajo del header. */
   margin-top: -86px;
   height: 86px;
   display: flex;
   align-items: center;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
 }
 
 .navbar-pasteleria .container {

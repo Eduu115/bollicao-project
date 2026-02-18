@@ -16,15 +16,14 @@
   z-index: 1000;
   height: 70px;
 
-  /* Estilo visual */
-  background: rgba(26, 13, 20, 0.75);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(232, 66, 122, 0.35);
+  /* Estilo visual: casi transparente con blur oscuro */
+  background: rgba(10, 4, 8, 0.15);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(232, 66, 122, 0.18);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(232, 66, 122, 0.1),
-    inset 0 1px 0 rgba(244, 184, 208, 0.08);
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(244, 184, 208, 0.06);
 
   /* Transición suave — solo propiedades interpolables */
   transition:
@@ -36,12 +35,14 @@
     border-color 0.5s ease;
 }
 
-/* Estado scrolled: full width, pegado arriba */
+/* Estado scrolled: full width, pegado arriba, más sólido */
 .header-blur.scrolled {
   top: 0;
   width: 100%;
   border-radius: 0;
-  background: rgba(26, 13, 20, 0.92);
+  background: rgba(26, 13, 20, 0.88);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
   border-color: rgba(232, 66, 122, 0.25);
   border-left: none;
   border-right: none;
@@ -72,7 +73,14 @@
   opacity: 0.85;
 }
 
-/* Carrito */
+/* Contenedor de iconos (perfil + carrito) */
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* Carrito y perfil */
 .carrito-circle {
   width: 44px;
   height: 44px;
@@ -176,6 +184,83 @@ header .nav-items-container .nav-link {
 }
 
 .nav-items-container .dropdown-item:hover {
+  background: rgba(232, 66, 122, 0.2);
+  color: #e8427a;
+}
+
+/* =============================================
+   NAV LINKS EN EL HEADER (aparecen al fusionarse)
+   ============================================= */
+.header-nav-links {
+  /* Oculto por defecto: sin ancho, sin opacidad */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  max-width: 0;
+  opacity: 0;
+  pointer-events: none;
+  /* Transición: primero se expande el header (0.5s), luego aparecen los links */
+  transition:
+    max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
+    opacity 0.35s ease 0.3s;
+}
+
+/* Al hacer scroll: los links aparecen */
+.header-blur.scrolled .header-nav-links {
+  max-width: 700px;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Estilos de los links dentro del header */
+.header-nav-links .navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.header-nav-links .nav-link {
+  color: #f4b8d0 !important;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.header-nav-links .nav-link:hover {
+  background: rgba(232, 66, 122, 0.2);
+  color: #e8427a !important;
+  transform: translateY(-1px);
+}
+
+.header-nav-links .nav-link.active {
+  background: rgba(232, 66, 122, 0.25);
+  color: #e8427a !important;
+}
+
+.header-nav-links .dropdown-menu {
+  background: rgba(45, 21, 32, 0.97);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 66, 122, 0.3);
+}
+
+.header-nav-links .dropdown-item {
+  color: #f4b8d0;
+  transition: all 0.2s ease;
+}
+
+.header-nav-links .dropdown-item:hover {
   background: rgba(232, 66, 122, 0.2);
   color: #e8427a;
 }

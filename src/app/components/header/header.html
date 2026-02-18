@@ -1,14 +1,44 @@
 <header class="header-blur fixed-top py-3" [class.scrolled]="scrolled">
   <div class="container d-flex justify-content-between align-items-center">
-    
+
     <!-- Logo a la izquierda -->
     <a class="navbar-brand fw-bold" routerLink="/">
       <img src="/img/logo.png" alt="Logo Empresa" height="40">
     </a>
 
-    <!-- Carrito a la derecha -->
-    <div class="carrito-circle">
-      <i class="fa-solid fa-cart-shopping"></i>
+    <!-- Nav links en el centro: ocultos hasta la fusión -->
+    <div class="header-nav-links">
+      <ul class="navbar-nav mb-0 gap-lg-3 flex-row">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" routerLink="/">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
+          <ul class="dropdown-menu border-0 shadow rounded-4">
+            <li><a class="dropdown-item" routerLink="/domicilio">Comida a domicilio</a></li>
+            <li><a class="dropdown-item" routerLink="/pasteles">Pasteles específico</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/nosotros">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/contacto">Contáctanos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/online">Pastelería online</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Iconos a la derecha -->
+    <div class="header-icons">
+      <div class="carrito-circle" routerLink="/perfil">
+        <i class="fa-solid fa-user"></i>
+      </div>
+      <div class="carrito-circle">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </div>
     </div>
 
   </div>
