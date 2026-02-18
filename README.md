@@ -1,59 +1,89 @@
-# Bollicao
+# Bollicao Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+Este proyecto es una aplicación web completa desarrollada con Angular en el frontend y Node.js/Express en el backend.
 
-## Development server
+## Requisitos Previos
 
-To start a local development server, run:
+Asegúrate de tener instalado lo siguiente en tu sistema:
+
+- [Node.js](https://nodejs.org/) (Versión LTS recomendada, v18 o superior)
+- [MongoDB](https://www.mongodb.com/) (Instancia local o cluster en MongoDB Atlas)
+
+## Instalación
+
+Sigue estos pasos para configurar el proyecto en tu entorno local:
+
+1. **Clonar el repositorio**
+
+   ```bash
+   git clone <URL_DEL_REPOSITORIO>
+   cd bollicao-project
+   ```
+
+2. **Instalar dependencias**
+
+   Ejecuta el siguiente comando en la raíz del proyecto para instalar todas las librerías necesarias:
+
+   ```bash
+   npm install
+   ```
+
+3. **Configuración de Variables de Entorno**
+
+   Crea un archivo `.env` en la raíz del proyecto tomando como referencia el archivo `.env.example`.
+
+   Windows (PowerShell):
+   ```powershell
+   copy .env.example .env
+   ```
+
+   Linux / Mac:
+   ```bash
+   cp .env.example .env
+   ```
+
+   Edita el archivo `.env` y asegúrate de que la cadena de conexión a MongoDB sea correcta:
+
+   ```env
+   MONGO_URI=mongodb://localhost:27017/bollicao
+   ```
+
+## Ejecución
+
+El proyecto consta de dos partes principales que deben ejecutarse: el backend (API) y el frontend (Angular).
+
+### 1. Inicialización de Datos (Seed)
+
+Si es la primera vez que configuras el proyecto (SOLO SI ES LA PRIMERA VEZ, ¡¡ELIMINA TODOS LOS DATOS SI YA HAY Y CREA NUEVOS DE EJEMPLO, CUIDADO!!), puedes ejecutar el siguiente comando para poblar la base de datos con datos de prueba:
 
 ```bash
-ng serve
+npm run seed
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 2. Iniciar el Backend
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Para levantar el servidor de desarrollo (con recarga automática):
 
 ```bash
-ng generate component component-name
+npm run api
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 3. Iniciar el Frontend
+
+En una nueva terminal, inicia la aplicación de Angular:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Una vez compilado, abre tu navegador y navega a `http://localhost:4200/`.
 
-To build the project run:
+## Despliegue (Build)
+
+Para generar la versión de producción de la aplicación, optimizada para el despliegue:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Esto generará los archivos estáticos en la carpeta `dist/`. El contenido de esta carpeta es lo que debe subirse a tu servidor web o servicio de hosting.
