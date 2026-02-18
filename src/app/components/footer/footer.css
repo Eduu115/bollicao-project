@@ -1,3 +1,4 @@
+/* Footer oscuro con rosas */
 .footer {
   position: static;
   width: 100%;
@@ -5,24 +6,29 @@
 }
 
 .footer-pasteleria {
-  background: linear-gradient(90deg, #FFF4E6, #F8C8DC);
+  background: linear-gradient(90deg, #1a0d14, #2d1520);
+  border-top: 1px solid rgba(232, 66, 122, 0.3);
 }
 
 .btn-social {
-  background-color: #E6D6F5;
-  color: #8B5E3C;
+  background-color: rgba(232, 66, 122, 0.15);
+  color: #f4b8d0;
   width: 45px;
   height: 45px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   transition: 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px rgba(232, 66, 122, 0.15);
+  border: 1px solid rgba(232, 66, 122, 0.3);
+  border-radius: 50%;
 }
 
 .btn-social:hover {
-  background-color: #F8C8DC;
+  background-color: rgba(232, 66, 122, 0.4);
+  color: #fce8f0;
   transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(232, 66, 122, 0.4);
 }
 
 .social-icon {
@@ -33,17 +39,17 @@
 
 .footer-link {
   text-decoration: none;
-  color: #8B5E3C;
+  color: #c9a0b4;
   transition: 0.3s;
   font-weight: 500;
 }
 
 .footer-link:hover {
-  color: #D4A373;
+  color: #e8427a;
 }
 
 .footer-divider {
-  border-top: 1px solid rgba(139, 94, 60, 0.2);
+  border-top: 1px solid rgba(232, 66, 122, 0.2);
 }
 
 :host {

@@ -1,6 +1,7 @@
-/* 🎂 Fondo estilo crema + rosa */
+/* 🌹 Navbar oscuro con gradiente rosa */
 .navbar-pasteleria {
-  background: linear-gradient(90deg, #FFF4E6, #F8C8DC);
+  background: linear-gradient(90deg, #2d1520, #3d1e2c);
+  border-bottom: 1px solid rgba(232, 66, 122, 0.3);
   position: relative;
   z-index: 10;
   margin-top: -80px;
@@ -16,35 +17,36 @@
   justify-content: center;
 }
 
-/* 🍫 Links */
+/* 🌸 Links */
 .navbar-pasteleria .nav-link {
-  color: #8B5E3C !important;
+  color: #f4b8d0 !important;
   transition: all 0.3s ease;
 }
 
 .navbar-pasteleria .nav-link:hover {
-  color: #D4A373 !important;
+  color: #e8427a !important;
   transform: translateY(-2px);
 }
 
-/* 🌸 Activo */
+/* Rosa fuerte activo */
 .navbar-pasteleria .nav-link.active {
-  color: #D4A373 !important;
+  color: #e8427a !important;
 }
 
 .navbar-pasteleria .dropdown-menu {
-  background-color: #FFF4E6;
+  background-color: #2d1520;
+  border: 1px solid rgba(232, 66, 122, 0.3);
 }
 
 .navbar-pasteleria .dropdown-item {
-  color: #8B5E3C;
+  color: #f4b8d0;
   border-radius: 10px;
   transition: 0.3s;
 }
 
 .navbar-pasteleria .dropdown-item:hover {
-  background-color: #F8C8DC;
-  color: white;
+  background-color: rgba(232, 66, 122, 0.25);
+  color: #e8427a;
 }
 
 .navbar-toggler:focus {
