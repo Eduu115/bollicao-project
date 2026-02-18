@@ -1,15 +1,16 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Header } from './components/header/header';
-import { Main } from './components/main/main';
 import { Footer } from './components/footer/footer';
-import { Hero } from "./components/hero/hero";
 import { Navbar } from './components/navbar/navbar';
+import { Perfil } from './vistas/perfil/perfil';
+import { Main } from './components/main/main';
+import { Header } from './components/header/header';
+import { Hero } from './components/hero/hero';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, Hero, Navbar, Footer, Main],
-  templateUrl:'./app.html',
+  imports: [RouterOutlet, Navbar, Footer, Perfil, Header, Hero, Main],
+  templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
