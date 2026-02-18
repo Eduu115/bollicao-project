@@ -1,0 +1,121 @@
+<div class="perfil-page">
+    <div class="container py-5">
+
+        <!-- Saldo / Puntos MMBRS -->
+        <div class="saldo-bar mb-4">
+            <div>
+                <span class="saldo-label">Puntos acumulados</span>
+                <span class="saldo-amount">{{ puntosTotales }} pts</span>
+                <span class="saldo-pendiente">1 punto por cada 10 € gastados</span>
+            </div>
+            <div class="saldo-meta">
+                <span class="saldo-gastado">Total gastado: {{ usuario.totalGastado.toFixed(2) }} €</span>
+            </div>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- Sidebar -->
+            <div class="col-lg-3">
+                <div class="perfil-sidebar">
+                    <div class="perfil-info mb-4">
+                        @if (usuario) {
+                        <h2 class="perfil-nombre">¡Hola, {{ usuario.nombre }}!</h2>
+                        <p class="perfil-email">{{ usuario.email }}</p>
+                        }
+                    </div>
+                    <nav class="perfil-nav">
+                        <a class="perfil-nav-link" [class.active]="tabActiva === 'compras'"
+                            (click)="cambiarTab('compras')" href="#">Mis compras</a>
+                        <a class="perfil-nav-link" [class.active]="tabActiva === 'datos'" (click)="cambiarTab('datos')"
+                            href="#">Datos personales</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Contenido principal -->
+            <div class="col-lg-9">
+                <div class="perfil-card">
+
+                    <!-- TAB: Mis compras -->
+                    @if (tabActiva === 'compras') {
+                    <div class="perfil-tabs mb-4">
+                        <h3 class="perfil-section-title">Mis compras</h3>
+                    </div>
+
+                    <!-- Botón de prueba (quitar en producción) -->
+                    <div class="mt-4 p-3 bg-light rounded border">
+                        <p class="small text-muted mb-2"><strong>Simular compra (solo para pruebas)</strong></p>
+                        <button class="btn btn-sm btn-primary" (click)="simularCompra('Tarta personalizada', 30)">
+                            Añadir pedido de 30 € (+3 pts)
+                        </button>
+                    </div>
+
+                    <div class="pedidos-list">
+                        @if (usuario && usuario.pedidos.length > 0) {
+                        @for (pedido of usuario.pedidos; track pedido.id) {
+                        <div class="pedido-item">
+                            <div class="pedido-icono">
+                                <i class="fa-solid fa-box-open"></i>
+                            </div>
+                            <div class="pedido-info">
+                                <span class="pedido-estado">{{ pedido.estado }}</span>
+                                <span class="pedido-desc">{{ pedido.descripcion }}</span>
+                                <span class="pedido-fecha">{{ pedido.fecha }}</span>
+                            </div>
+                            <div class="pedido-derecha">
+                                <span class="pedido-total">{{ pedido.total }} €</span>
+                                <span class="pedido-puntos">+{{ pedido.puntos }} pts</span>
+                            </div>
+                            <button class="btn-eliminar" (click)="eliminarPedido(pedido.id)" title="Eliminar pedido">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                        }
+                        } @else {
+                        <div class="sin-pedidos">
+                            <i class="fa-solid fa-shopping-bag"></i>
+                            <p>Aún no tienes pedidos</p>
+                        </div>
+                        }
+                    </div>
+                    }
+
+                    <!-- TAB: Datos personales -->
+                    @if (tabActiva === 'datos') {
+                    <div class="perfil-tabs mb-4">
+                        <h3 class="perfil-section-title">Datos personales</h3>
+                    </div>
+
+                    @if (usuario) {
+                    <div class="datos-personales">
+                        <div class="dato-item">
+                            <span class="dato-label">Nombre</span>
+                            <span class="dato-valor">{{ usuario.nombre }}</span>
+                        </div>
+                        <div class="dato-item">
+                            <span class="dato-label">Email</span>
+                            <span class="dato-valor">{{ usuario.email }}</span>
+                        </div>
+                        <div class="dato-item">
+                            <span class="dato-label">Total gastado</span>
+                            <span class="dato-valor">{{ usuario.totalGastado.toFixed(2) }} €</span>
+                        </div>
+                        <div class="dato-item">
+                            <span class="dato-label">Puntos acumulados</span>
+                            <span class="dato-valor">{{ puntosTotales }} pts</span>
+                        </div>
+                        <div class="dato-item">
+                            <span class="dato-label">Pedidos realizados</span>
+                            <span class="dato-valor">{{ usuario.pedidos.length }}</span>
+                        </div>
+                    </div>
+                    }
+                    }
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

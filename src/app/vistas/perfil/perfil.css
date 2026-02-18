@@ -1,0 +1,268 @@
+.perfil-page {
+    background: linear-gradient(160deg, #ffffff 0%, #ffffff 100%);
+    min-height: 60vh;
+}
+
+/* Barra de saldo */
+.saldo-bar {
+    background: white;
+    border: 1px solid #F8C8DC;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 12px rgba(248, 200, 220, 0.3);
+}
+
+.saldo-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #D4A373;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.saldo-amount {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #8B5E3C;
+    margin-right: 0.75rem;
+}
+
+.saldo-pendiente {
+    font-size: 0.8rem;
+    color: #c9a08a;
+}
+
+.saldo-gastado {
+    font-size: 0.85rem;
+    color: #8B5E3C;
+    font-weight: 500;
+}
+
+/* Sidebar */
+.perfil-sidebar {
+    background: white;
+    border: 1px solid #F8C8DC;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(248, 200, 220, 0.2);
+}
+
+.perfil-nombre {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #8B5E3C;
+    margin-bottom: 0.25rem;
+}
+
+.perfil-email {
+    font-size: 0.85rem;
+    color: #c9a08a;
+    margin-bottom: 0;
+}
+
+.perfil-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.perfil-nav-link {
+    display: block;
+    padding: 0.6rem 0.75rem;
+    color: #8B5E3C;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: background 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.perfil-nav-link:hover {
+    background: #FFF4E6;
+    color: #8B5E3C;
+}
+
+.perfil-nav-link.active {
+    font-weight: 700;
+    color: #8B5E3C;
+    background: linear-gradient(90deg, #FFF4E6, #fce8f0);
+    border-left: 3px solid #F8C8DC;
+}
+
+/* Card principal */
+.perfil-card {
+    background: white;
+    border: 1px solid #F8C8DC;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(248, 200, 220, 0.2);
+}
+
+/* Tabs header */
+.perfil-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #F8C8DC;
+    padding-bottom: 1rem;
+}
+
+.perfil-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #8B5E3C;
+    margin: 0;
+}
+
+/* Pedidos */
+.pedidos-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.pedido-item {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #fce8f0;
+}
+
+.pedido-desc {
+    font-size: 0.8rem;
+    color: #c9a08a;
+}
+
+.pedido-derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
+    flex-shrink: 0;
+}
+
+.pedido-puntos {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #8B5E3C;
+    background: #E6D6F5;
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+}
+
+.btn-eliminar {
+    background: none;
+    border: none;
+    color: #D4A373;
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.4rem;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.btn-eliminar:hover {
+    color: #c0392b;
+    background: #fce8f0;
+}
+
+
+.sin-pedidos {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #D4A373;
+}
+
+.sin-pedidos i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.pedido-icono {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #FFF4E6, #fce8f0);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #D4A373;
+    flex-shrink: 0;
+    border: 1px solid #F8C8DC;
+}
+
+.pedido-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.pedido-estado {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #8B5E3C;
+}
+
+.pedido-fecha {
+    font-size: 0.8rem;
+    color: #c9a08a;
+}
+
+.pedido-total {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #8B5E3C;
+}
+
+/* Datos personales */
+.datos-personales {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.dato-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid #fce8f0;
+}
+
+.dato-label {
+    font-size: 0.8rem;
+    color: #D4A373;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+}
+
+.dato-valor {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #8B5E3C;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .saldo-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .perfil-tabs {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
