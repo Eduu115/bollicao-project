@@ -14,9 +14,8 @@ export class Header {
   scrolled = false;
 
   @HostListener('window:scroll')
-  onScroll() { // esto es el umbral del scroll, cuando el usuario baja mas de este numero de px el header cambia
-    this.scrolled = window.scrollY > 350;
+  onScroll() {
+    // Se activa cuando el navbar llega al top (hero = 100vh, navbar = 86px)
+    this.scrolled = window.scrollY > (window.innerHeight - 86);
   }
-
 }
-
