@@ -1,13 +1,57 @@
-/* Header oscuro con efecto blur */
+/* =============================================
+   HEADER FLOTANTE → FULL WIDTH al hacer scroll
+   ============================================= */
+
+/* Estado inicial: flotante, 80%, border-radius */
 .header-blur {
-  background: rgba(26, 13, 20, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(232, 66, 122, 0.3);
+  /* Posición */
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  /* Centrado sin transform: margen automático a ambos lados */
+  width: 80%;
+  margin-inline: auto;
+  border-radius: 20px;
   z-index: 1000;
-  height: 80px;
+  height: 70px;
+
+  /* Estilo visual */
+  background: rgba(26, 13, 20, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(232, 66, 122, 0.35);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(232, 66, 122, 0.1),
+    inset 0 1px 0 rgba(244, 184, 208, 0.08);
+
+  /* Transición suave — solo propiedades interpolables */
+  transition:
+    top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.5s ease,
+    box-shadow 0.5s ease,
+    border-color 0.5s ease;
 }
 
+/* Estado scrolled: full width, pegado arriba */
+.header-blur.scrolled {
+  top: 0;
+  width: 100%;
+  border-radius: 0;
+  background: rgba(26, 13, 20, 0.92);
+  border-color: rgba(232, 66, 122, 0.25);
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(232, 66, 122, 0.2);
+}
+
+/* Contenedor interno */
 .header-blur .container {
   height: 100%;
   display: flex;
@@ -20,19 +64,20 @@
 .header-blur .navbar-brand {
   color: #f4b8d0 !important;
   text-decoration: none;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .header-blur .navbar-brand:hover {
   transform: scale(1.05);
+  opacity: 0.85;
 }
 
-/* Carrito minimalista con círculo */
+/* Carrito */
 .carrito-circle {
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(232, 66, 122, 0.2);
+  background: rgba(232, 66, 122, 0.18);
   backdrop-filter: blur(5px);
   display: flex;
   align-items: center;
@@ -40,21 +85,23 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(232, 66, 122, 0.2);
-  border: 1px solid rgba(232, 66, 122, 0.35);
+  border: 1px solid rgba(232, 66, 122, 0.4);
 }
 
 .carrito-circle:hover {
-  background: rgba(232, 66, 122, 0.4);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(232, 66, 122, 0.4);
+  background: rgba(232, 66, 122, 0.38);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(232, 66, 122, 0.45);
 }
 
 .carrito-circle i {
   color: #f4b8d0;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
-/* Contenedor de items del navbar fusionado en header - SIEMPRE HORIZONTAL */
+/* =============================================
+   NAV ITEMS (fusionado en header)
+   ============================================= */
 .nav-items-container {
   flex: 1;
   display: flex !important;
@@ -90,7 +137,6 @@
   height: 100%;
 }
 
-/* Override Bootstrap nav-link */
 .nav-items-container .nav-link,
 .nav-items-container a.nav-link,
 header .nav-items-container .nav-link {
@@ -117,7 +163,7 @@ header .nav-items-container .nav-link {
   color: #e8427a !important;
 }
 
-/* Dropdown en header */
+/* Dropdown */
 .nav-items-container .dropdown-menu {
   background: rgba(45, 21, 32, 0.97);
   backdrop-filter: blur(12px);
@@ -134,8 +180,22 @@ header .nav-items-container .nav-link {
   color: #e8427a;
 }
 
-/* Responsive - mantener row siempre */
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 @media (max-width: 768px) {
+  .header-blur {
+    width: 92%;
+    top: 10px;
+    border-radius: 16px;
+  }
+
+  .header-blur.scrolled {
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+  }
+
   .nav-items-container {
     max-width: none;
     overflow-x: auto;
