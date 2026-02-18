@@ -1,28 +1,29 @@
 .perfil-page {
-    background: linear-gradient(160deg, #1a0d14 0%, #2d1520 100%);
-    min-height: 60vh;
-    color: #fce8f0;
+    background: #12080f;
+    min-height: 100vh;
+    color: #f0dde6;
+    padding-top: 110px;
 }
 
 /* Barra de saldo */
 .saldo-bar {
-    background: #261018;
-    border: 1px solid rgba(232, 66, 122, 0.3);
+    background: #1e0f18;
+    border: 1px solid #3d2030;
     border-radius: 12px;
     padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    box-shadow: 0 2px 16px rgba(232, 66, 122, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .saldo-label {
     display: block;
-    font-size: 0.75rem;
-    color: #d4688e;
+    font-size: 0.72rem;
+    color: #c9a0b4;
     text-transform: uppercase;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.08em;
     margin-bottom: 0.25rem;
     font-weight: 600;
 }
@@ -30,40 +31,40 @@
 .saldo-amount {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #f4b8d0;
+    color: #f9d4e4;
     margin-right: 0.75rem;
 }
 
 .saldo-pendiente {
     font-size: 0.8rem;
-    color: #c9a0b4;
+    color: #9e7a8e;
 }
 
 .saldo-gastado {
     font-size: 0.85rem;
-    color: #f4b8d0;
+    color: #d4a8bc;
     font-weight: 500;
 }
 
 /* Sidebar */
 .perfil-sidebar {
-    background: #261018;
-    border: 1px solid rgba(232, 66, 122, 0.25);
+    background: #1e0f18;
+    border: 1px solid #3d2030;
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 2px 16px rgba(232, 66, 122, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 .perfil-nombre {
     font-size: 1.1rem;
     font-weight: 700;
-    color: #f4b8d0;
+    color: #f9d4e4;
     margin-bottom: 0.25rem;
 }
 
 .perfil-email {
     font-size: 0.85rem;
-    color: #c9a0b4;
+    color: #9e7a8e;
     margin-bottom: 0;
 }
 
@@ -85,24 +86,24 @@
 }
 
 .perfil-nav-link:hover {
-    background: rgba(232, 66, 122, 0.15);
-    color: #f4b8d0;
+    background: rgba(255, 255, 255, 0.05);
+    color: #f9d4e4;
 }
 
 .perfil-nav-link.active {
     font-weight: 700;
-    color: #e8427a;
-    background: rgba(232, 66, 122, 0.2);
-    border-left: 3px solid #e8427a;
+    color: #f9d4e4;
+    background: rgba(255, 255, 255, 0.07);
+    border-left: 3px solid #c9a0b4;
 }
 
 /* Card principal */
 .perfil-card {
-    background: #261018;
-    border: 1px solid rgba(232, 66, 122, 0.25);
+    background: #1e0f18;
+    border: 1px solid #3d2030;
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 2px 16px rgba(232, 66, 122, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
 /* Tabs header */
@@ -110,14 +111,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 2px solid rgba(232, 66, 122, 0.3);
+    border-bottom: 1px solid #3d2030;
     padding-bottom: 1rem;
 }
 
 .perfil-section-title {
     font-size: 1rem;
     font-weight: 700;
-    color: #f4b8d0;
+    color: #f9d4e4;
     margin: 0;
 }
 
@@ -133,12 +134,12 @@
     align-items: center;
     gap: 1.25rem;
     padding: 1.25rem 0;
-    border-bottom: 1px solid rgba(232, 66, 122, 0.15);
+    border-bottom: 1px solid #2a1220;
 }
 
 .pedido-desc {
     font-size: 0.8rem;
-    color: #c9a0b4;
+    color: #9e7a8e;
 }
 
 .pedido-derecha {
@@ -151,18 +152,18 @@
 
 .pedido-puntos {
     font-size: 0.75rem;
-    font-weight: 700;
-    color: #f4b8d0;
-    background: rgba(232, 66, 122, 0.25);
+    font-weight: 600;
+    color: #d4a8bc;
+    background: rgba(255, 255, 255, 0.06);
     padding: 0.15rem 0.6rem;
     border-radius: 20px;
-    border: 1px solid rgba(232, 66, 122, 0.4);
+    border: 1px solid #3d2030;
 }
 
 .btn-eliminar {
     background: none;
     border: none;
-    color: #d4688e;
+    color: #7a5060;
     cursor: pointer;
     font-size: 0.8rem;
     padding: 0.2rem 0.4rem;
@@ -171,14 +172,14 @@
 }
 
 .btn-eliminar:hover {
-    color: #e8427a;
-    background: rgba(232, 66, 122, 0.15);
+    color: #c9a0b4;
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .sin-pedidos {
     text-align: center;
     padding: 3rem 1rem;
-    color: #d4688e;
+    color: #7a5060;
 }
 
 .sin-pedidos i {
@@ -190,15 +191,15 @@
 .pedido-icono {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, #2d1520, #3d1e2c);
+    background: #2a1220;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    color: #e8427a;
+    color: #c9a0b4;
     flex-shrink: 0;
-    border: 1px solid rgba(232, 66, 122, 0.3);
+    border: 1px solid #3d2030;
 }
 
 .pedido-info {
@@ -209,20 +210,20 @@
 }
 
 .pedido-estado {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 0.9rem;
-    color: #f4b8d0;
+    color: #f0dde6;
 }
 
 .pedido-fecha {
     font-size: 0.8rem;
-    color: #c9a0b4;
+    color: #9e7a8e;
 }
 
 .pedido-total {
     font-weight: 700;
     font-size: 0.95rem;
-    color: #e8427a;
+    color: #f9d4e4;
 }
 
 /* Datos personales */
@@ -237,21 +238,21 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
-    border-bottom: 1px solid rgba(232, 66, 122, 0.15);
+    border-bottom: 1px solid #2a1220;
 }
 
 .dato-label {
-    font-size: 0.8rem;
-    color: #d4688e;
+    font-size: 0.78rem;
+    color: #9e7a8e;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.07em;
     font-weight: 600;
 }
 
 .dato-valor {
     font-size: 0.95rem;
-    font-weight: 700;
-    color: #f4b8d0;
+    font-weight: 600;
+    color: #f0dde6;
 }
 
 /* Responsive */

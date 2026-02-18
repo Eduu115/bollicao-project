@@ -10,7 +10,8 @@
         "skipLibCheck": true
     },
     "include": [
-        "**/*.ts"
+        "**/*.ts",
+        "controllers/clienteControllers.ts"
     ],
     "exclude": [
         "node_modules",
