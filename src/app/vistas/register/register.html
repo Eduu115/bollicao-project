@@ -1,0 +1,52 @@
+<div class="pastel-bg d-flex align-items-center min-vh-100">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-9 col-lg-6">
+        <div class="text-center mb-4">
+          <h1 class="display-6 text-cocoa fw-semibold mb-2"> Crea tu cuenta </h1>
+          <p class="text-muted mb-0"> Únete y empieza a pedir tus dulces </p>
+        </div>
+
+        <div class="card card-pastel p-4">
+          <form (ngSubmit)="register()" #regForm="ngForm" novalidate>
+
+            <!-- Error -->
+            <div *ngIf="errorMessage" class="alert alert-danger py-2">
+              {{ errorMessage }}
+            </div>
+
+            <div class="row g-3">
+              <!-- Email -->
+              <div class="col-12">
+                <label class="form-label" for="email">Correo electrónico</label>
+                <input id="email" type="email" class="form-control" placeholder="tu@correo.com"
+                       [(ngModel)]="email" name="email" required>
+              </div>
+
+              <!-- Password -->
+              <div class="col-12">
+                <label class="form-label" for="password">Contraseña</label>
+                <input id="password" type="password" class="form-control" placeholder="******"
+                       [(ngModel)]="password" name="password" required>
+              </div>
+
+              <!-- Buttons -->
+              <div class="col-12 mt-2">
+                <button type="submit" class="btn btn-cupcake text-white w-100 py-2" [disabled]="regForm.invalid"> Crear cuenta </button>
+
+                <div class="text-center mt-3">
+                  <span class="text-muted">¿Ya tienes cuenta?</span>
+                  <a class="link-cupcake ms-1" routerLink="/login">Iniciar sesión</a>
+                </div>
+
+                <p class="text-center text-muted mt-3 mb-0 small">
+                   AJE · Pastelería online 
+                </p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -33,10 +33,40 @@ export class PuntosService {
         return raw ? JSON.parse(raw) : null;
     }
 
-    private saveUsuario(usuario: Usuario): void {
-        if (!isPlatformBrowser(this.platformId)) return;
-        localStorage.setItem('currentUser', JSON.stringify(usuario));
-    }
+     private saveUsuario(usuario: Usuario): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    localStorage.setItem('currentUser', JSON.stringify(usuario));
+  }
+
+  setUsuarioActual(email: string, nombre?: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const normalizedEmail = (email || '').trim();
+    if (!normalizedEmail) return;
+
+    const existente = this.getUsuario();
+    if (existente && existente.email === normalizedEmail) return;
+
+    const usuario: Usuario = {
+      nombre: nombre ?? this.nombreDesdeEmail(normalizedEmail),
+      email: normalizedEmail,
+      totalGastado: 0,
+      pedidos: []
+    };
+
+    this.saveUsuario(usuario);
+  }
+
+  // ✅ NUEVO: borra el usuario actual (útil para logout)
+  clearUsuarioActual(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    localStorage.removeItem('currentUser');
+  }
+
+  // Calcula los puntos acumulados en base al total gastado
+  calcularPuntos(totalGastado: number): number {
+    return Math.floor(totalGastado / EUROS_POR_PUNTO);
+  }
 
     // Calcula los puntos acumulados en base al total gastado
     calcularPuntos(totalGastado: number): number {
@@ -86,5 +116,10 @@ export class PuntosService {
 
     getUsuarioActual(): Usuario | null {
         return this.getUsuario();
+    }
+
+    private nombreDesdeEmail(email: string): string {
+        const base = (email.split('@')[0] || 'Usuario').trim();
+        return base ? base.charAt(0).toUpperCase() + base.slice(1) : 'Usuario';
     }
 }
