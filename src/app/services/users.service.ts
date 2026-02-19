@@ -4,9 +4,6 @@ import { Injectable } from '@angular/core';
 const STORAGE_KEY_USERS = 'newspaper_users';
 const STORAGE_KEY_SESSION = 'newspaper_current_user';
 
-// ya puestos lo hago tipo java con la "plantilla" que es la interface y el service para unteractuar
-// como hariamos en java con los interface y las service implement
-// si no, te lo juro que no se hacerlo, mala mia odio ts
 
 export interface User {
   email: string;
