@@ -68,11 +68,6 @@ export class PuntosService {
     return Math.floor(totalGastado / EUROS_POR_PUNTO);
   }
 
-    // Calcula los puntos acumulados en base al total gastado
-    calcularPuntos(totalGastado: number): number {
-        return Math.floor(totalGastado / EUROS_POR_PUNTO);
-    }
-
     // Añade un pedido y recalcula los puntos
     añadirPedido(descripcion: string, total: number): void {
         let usuario = this.getUsuario();

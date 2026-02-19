@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service'; 
 import { PuntosService } from '../../services/puntos.service';
 
@@ -18,11 +18,7 @@ export class Login implements OnInit {
   errorMessage = '';
   private returnUrl: string | null = null;
 
-  form = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    remember: [false]
-  });
+  form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -34,6 +30,12 @@ export class Login implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      remember: [false],
+    });
+
     this.returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
     if (isPlatformBrowser(this.platformId)) {
@@ -63,9 +65,9 @@ export class Login implements OnInit {
 
     this.loading = true;
 
-    const email = (this.f.email.value || '').trim();
-    const password = this.f.password.value || '';
-    const remember = !!this.f.remember.value;
+    const email = (this.f['email'].value || '').trim();
+    const password = this.f['password'].value || '';
+    const remember = !!this.f['remember'].value;
 
     const user = this.usersService.findUserByEmailAndPassword(email, password);
 

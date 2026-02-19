@@ -1,26 +1,26 @@
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../../services/users.service'; // ajusta ruta/nombre real
 import { PuntosService } from '../../services/puntos.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
 export class Register implements OnInit {
-  email = '';
-  password = '';
+  form!: FormGroup;
   errorMessage = '';
 
   constructor(
     private router: Router,
     private usersService: UsersService,
     private puntosService: PuntosService,
+    private fb: FormBuilder,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -28,9 +28,14 @@ export class Register implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.usersService.setUsersEjemplo();
     }
+
+    this.form = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(4)]]
+    });
   }
 
-  register(): void {
+  submit(): void {
     this.errorMessage = '';
 
     if (!isPlatformBrowser(this.platformId)) {
@@ -38,8 +43,13 @@ export class Register implements OnInit {
       return;
     }
 
-    const email = this.email.trim().toLowerCase();
-    const password = this.password;
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    const email = (this.form.value.email as string).trim().toLowerCase();
+    const password = this.form.value.password as string;
 
 
     const created = this.usersService.registerUser
