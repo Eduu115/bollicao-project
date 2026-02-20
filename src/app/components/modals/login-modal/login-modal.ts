@@ -27,7 +27,7 @@ function getBootstrap(): any {
 @Component({
   selector: 'app-login-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule ],
   templateUrl: './login-modal.html',
   styleUrl: './login-modal.css'
 })
