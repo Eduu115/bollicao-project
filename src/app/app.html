@@ -3,3 +3,9 @@
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
+
+<!-- Modales de autenticación - solo en navegador -->
+@if (isBrowser()) {
+  <app-login-modal></app-login-modal>
+  <app-register-modal></app-register-modal>
+}

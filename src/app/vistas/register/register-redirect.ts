@@ -1,24 +1,25 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthModalService } from '../../services/auth-modal.service';
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-register-redirect',
   standalone: true,
-  imports: [RouterLink],
-  templateUrl: './navbar.html',
-  styleUrl: './navbar.css',
+  template: ''
 })
-export class Navbar {
+export class RegisterRedirect implements OnInit {
   constructor(
+    private router: Router,
     private authModalService: AuthModalService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-  openRegisterModal(): void {
+  ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
+      // Abrir el modal de registro y navegar a home
       this.authModalService.openRegisterModal();
+      this.router.navigate(['/']);
     }
   }
 }

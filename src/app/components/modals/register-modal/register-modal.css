@@ -1,0 +1,140 @@
+#registerModal .modal-dialog {
+  position: relative;
+  z-index: 1;
+}
+
+#registerModal.modal {
+  background: linear-gradient(120deg, rgba(26, 13, 20, 0.92) 0%, rgba(45, 21, 32, 0.92) 50%, rgba(61, 30, 44, 0.92) 100%);
+}
+
+#registerModal .modal-dialog::before,
+#registerModal .modal-dialog::after {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.25;
+  z-index: -1;
+  pointer-events: none;
+}
+
+#registerModal .modal-dialog::before {
+  background: rgba(232, 66, 122, 0.6);
+  top: -140px;
+  left: -140px;
+}
+
+#registerModal .modal-dialog::after {
+  background: rgba(244, 184, 208, 0.4);
+  bottom: -140px;
+  right: -140px;
+}
+
+.modal-pastel {
+  background: rgba(26, 13, 20, 0.72);
+  border: 1px solid rgba(244, 184, 208, 0.2);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  overflow: hidden;
+}
+
+/* Header / botón cerrar */
+#registerModal .modal-header .btn-close {
+  opacity: 0.9;
+  filter: invert(1) grayscale(100%);
+}
+#registerModal .modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+.card-pastel {
+  background: rgba(26, 13, 20, 0.6);
+  border: 1px solid rgba(244, 184, 208, 0.2);
+  border-radius: 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.text-cocoa {
+  color: #f4b8d0 !important;
+  text-shadow: 0 0 25px rgba(232, 66, 122, 0.4);
+}
+
+.form-label {
+  color: #fce8f0;
+  font-weight: 500;
+}
+
+.text-muted {
+  color: rgba(201, 160, 180, 0.8) !important;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(201, 160, 180, 0.3);
+  color: #fce8f0;
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.2s ease;
+}
+
+.form-control::placeholder {
+  color: rgba(252, 232, 240, 0.45);
+}
+
+.form-control:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(244, 184, 208, 0.6);
+  box-shadow: 0 0 0 0.25rem rgba(232, 66, 122, 0.18);
+  color: #ffffff;
+}
+
+.btn-cupcake {
+  background: linear-gradient(135deg, #e8427a 0%, #f4b8d0 100%);
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 14px 30px rgba(232, 66, 122, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-cupcake:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(232, 66, 122, 0.35);
+  filter: brightness(1.05);
+}
+
+.btn-cupcake:disabled {
+  opacity: 0.6;
+  box-shadow: none;
+  transform: none;
+}
+
+.link-cupcake {
+  color: #f4b8d0;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(244, 184, 208, 0.5);
+  transition: all 0.2s ease;
+}
+
+.link-cupcake:hover {
+  color: #ffffff;
+  border-bottom-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .modal-pastel,
+  .card-pastel {
+    border-radius: 16px;
+  }
+
+  #registerModal .modal-dialog::before,
+  #registerModal .modal-dialog::after {
+    width: 340px;
+    height: 340px;
+  }
+}
