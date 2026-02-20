@@ -5,4 +5,7 @@ import { Perfil } from './vistas/perfil/perfil';
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'perfil', component: Perfil },
+    { path: '**', redirectTo: '' }
 ];
+
+
