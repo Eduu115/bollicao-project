@@ -1,8 +1,8 @@
 .hero {
     height: 100vh;
-    background-image: url("/img/laForjaDelAzucarHero.png");
+    background-image: url("/img/fondoHero.png");
     background-size: cover;
-    background-position: center;
+    background-position: bottom center;
     background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
