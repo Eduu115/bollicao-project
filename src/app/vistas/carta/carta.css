@@ -264,3 +264,43 @@
     width: 2.5rem;
     height: 2.5rem;
 }
+
+
+/* ── Toast ─────────────────────────────────── */
+
+.toast-pasteleria-wrapper {
+  z-index: 1055;
+}
+
+.toast-pasteleria {
+  background: linear-gradient(90deg, #1a0d14, #2d1520);
+  border: 1px solid rgba(232, 66, 122, 0.4);
+  color: #f4b8d0;
+  box-shadow: 0 6px 20px rgba(232, 66, 122, 0.3);
+  border-radius: 12px;
+  min-width: 280px;
+  backdrop-filter: blur(6px);
+  animation: fadeInUp 0.4s ease;
+}
+
+.toast-header-pasteleria {
+  background: transparent;
+  border-bottom: 1px solid rgba(232, 66, 122, 0.2);
+  color: #fce8f0;
+  font-weight: 600;
+}
+
+.toast-pasteleria .toast-body {
+  color: #c9a0b4;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -81,4 +81,24 @@
         }
 
     </section>
-</div>
+
+    <!-- Toast -->
+    @if (showToast) {
+    <div class="position-fixed bottom-0 end-0 p-4 toast-pasteleria-wrapper">
+    
+      <div class="toast toast-pasteleria show" role="alert" aria-live="assertive" aria-atomic="true">
+    
+        <div class="toast-header toast-header-pasteleria">
+          <strong class="me-auto">Notificación</strong>
+          <button type="button" class="btn-close btn-close-white" (click)="showToast = false"aria-label="Close"></button>
+        </div>
+    
+        <div class="toast-body">
+          {{ toastMessage }}
+        </div>
+    
+      </div>
+    
+    </div>
+
+}
