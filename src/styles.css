@@ -27,6 +27,10 @@
     --shadow-rosa: rgba(232, 66, 122, 0.25);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 body {
     margin: 0;

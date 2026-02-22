@@ -52,6 +52,10 @@
   border-top: 1px solid rgba(232, 66, 122, 0.2);
 }
 
+.footer-copyright {
+  color: #c9a0b4;
+}
+
 :host {
   display: block;
 }
