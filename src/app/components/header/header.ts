@@ -3,6 +3,8 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthModalService } from '../../services/auth-modal.service';
+import { UsersService } from '../../services/users.service';
+import { ProfileOffcanvasService } from '../../services/profile-offcanvas.service';
 
 @Component({
   selector: 'app-header',
@@ -17,13 +19,28 @@ export class Header {
 
   constructor(
     private authModalService: AuthModalService,
+    private usersService: UsersService,
+    private profileOffcanvasService: ProfileOffcanvasService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   @HostListener('window:scroll')
   onScroll() {
-    // Se activa cuando el navbar llega al top (hero = 100vh, navbar = 86px)
-    this.scrolled = window.scrollY > (window.innerHeight - 86);
+    if (isPlatformBrowser(this.platformId)) {
+      this.scrolled = window.scrollY > (window.innerHeight - 86);
+    }
+  }
+
+  /** Clic en el icono de perfil: abre offcanvas si hay sesión, o modal login si no */
+  onProfileClick(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const session = this.usersService.getCurrentSession();
+    if (session) {
+      this.profileOffcanvasService.open();
+    } else {
+      this.authModalService.openLoginModal();
+    }
   }
 
   openRegisterModal(): void {

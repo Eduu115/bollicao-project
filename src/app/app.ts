@@ -5,10 +5,11 @@ import { Footer } from './components/footer/footer';
 import { Header } from './components/header/header';
 import { LoginModal } from './components/modals/login-modal/login-modal';
 import { RegisterModal } from './components/modals/register-modal/register-modal';
+import { ProfileOffcanvas } from './components/modals/profile-offcanvas/profile-offcanvas';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Footer, Header, LoginModal, RegisterModal],
+  imports: [RouterOutlet, Footer, Header, LoginModal, RegisterModal, ProfileOffcanvas],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

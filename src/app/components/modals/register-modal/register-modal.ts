@@ -45,7 +45,7 @@ export class RegisterModal implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private authModalService: AuthModalService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -69,44 +69,23 @@ export class RegisterModal implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId) && this.modalElement) {
-      const Bootstrap = getBootstrap();
-      if (Bootstrap) {
-        this.modalInstance = new Bootstrap.Modal(this.modalElement.nativeElement, {
-          backdrop: 'static',
-          keyboard: false
-        });
-      } else {
-        console.error('Bootstrap is not loaded');
-      }
-    }
+    // No se instancia aquí; se usa getOrCreateInstance en openModal.
   }
 
   openModal(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-    
-    if (!this.modalElement) {
-      console.warn('Modal element not available yet');
+    if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
+
+    const Bootstrap = getBootstrap();
+    if (!Bootstrap) {
+      console.error('Bootstrap is not loaded');
       return;
     }
 
-    if (!this.modalInstance) {
-      const Bootstrap = getBootstrap();
-      if (!Bootstrap) {
-        console.error('Bootstrap is not loaded');
-        return;
-      }
-      this.modalInstance = new Bootstrap.Modal(this.modalElement.nativeElement, {
-        backdrop: 'static',
-        keyboard: false
-      });
-    }
-    
-    if (this.modalInstance) {
-      this.modalInstance.show();
-    }
+    this.modalInstance = Bootstrap.Modal.getOrCreateInstance(this.modalElement.nativeElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+    this.modalInstance.show();
   }
 
   closeModal(): void {

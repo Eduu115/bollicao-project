@@ -1,45 +1,41 @@
-import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { UsersService } from '../../../services/users.service';
 import { PuntosService } from '../../../services/puntos.service';
 import { AuthModalService } from '../../../services/auth-modal.service';
 
 declare var bootstrap: any;
 
-// Asegurar acceso a bootstrap desde window
 function getBootstrap(): any {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-  // Bootstrap puede estar en window.bootstrap o como variable global
-  if ((window as any).bootstrap) {
-    return (window as any).bootstrap;
-  }
-  if (typeof bootstrap !== 'undefined') {
-    return bootstrap;
-  }
+  if (typeof window === 'undefined') return null;
+  if ((window as any)['bootstrap']) return (window as any)['bootstrap'];
+  if (typeof bootstrap !== 'undefined') return bootstrap;
   return null;
 }
 
 @Component({
   selector: 'app-login-modal',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule ],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login-modal.html',
   styleUrl: './login-modal.css'
 })
-export class LoginModal implements OnInit, AfterViewInit {
+export class LoginModal implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('loginModal') modalElement!: ElementRef;
-  private modalInstance: any;
+  private modalInstance: any = null;
 
   loading = false;
   showPassword = false;
-  errorMessage = '';
+  errorMessage = ''
   form!: FormGroup;
   private returnUrl: string | null = null;
+
+  // Gestión de suscripciones para evitar leaks
+  private subs = new Subscription();
 
   constructor(
     private fb: FormBuilder,
@@ -49,7 +45,7 @@ export class LoginModal implements OnInit, AfterViewInit {
     private puntosService: PuntosService,
     private authModalService: AuthModalService,
     @Inject(PLATFORM_ID) private platformId: Object
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -64,62 +60,53 @@ export class LoginModal implements OnInit, AfterViewInit {
       const rememberedEmail = localStorage.getItem('remembered_email');
       if (rememberedEmail) this.form.patchValue({ email: rememberedEmail });
 
-      // Suscribirse a los cambios del servicio y returnUrl
-      this.authModalService.returnUrl$.subscribe(url => {
-        this.returnUrl = url;
-      });
+      this.subs.add(
+        this.authModalService.returnUrl$.subscribe(url => {
+          this.returnUrl = url;
+        })
+      );
 
-      // Suscribirse a los cambios del servicio
-      this.authModalService.loginModal$.subscribe(open => {
-        if (open) {
-          // Esperar a que el ViewChild esté disponible
-          setTimeout(() => this.openModal(), 100);
-        } else {
-          this.closeModal();
-        }
-      });
+      this.subs.add(
+        this.authModalService.loginModal$.subscribe((open: boolean) => {
+          if (open) {
+            setTimeout(() => this.openModal(), 50);
+          } else {
+            this.closeModal();
+          }
+        })
+      );
     }
   }
 
   ngAfterViewInit(): void {
-    if (isPlatformBrowser(this.platformId) && this.modalElement) {
-      const Bootstrap = getBootstrap();
-      if (Bootstrap) {
-        this.modalInstance = new Bootstrap.Modal(this.modalElement.nativeElement, {
-          backdrop: 'static',
-          keyboard: false
-        });
-      } else {
-        console.error('Bootstrap is not loaded');
-      }
-    }
+    if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
+
+    // Escuchar el evento de Bootstrap para cuando el usuario cierra con el botón X
+    // Así reseteamos el servicio y evitamos estado incoherente
+    this.modalElement.nativeElement.addEventListener('hidden.bs.modal', () => {
+      this.authModalService.closeLoginModal();
+    });
+  }
+
+  ngOnDestroy(): void {
+    // Limpiar todas las suscripciones al destruirse el componente
+    this.subs.unsubscribe();
   }
 
   openModal(): void {
-    if (!isPlatformBrowser(this.platformId)) {
-      return;
-    }
-    
-    if (!this.modalElement) {
-      console.warn('Modal element not available yet');
+    if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
+
+    const Bootstrap = getBootstrap();
+    if (!Bootstrap) {
+      console.error('Bootstrap is not loaded');
       return;
     }
 
-    if (!this.modalInstance) {
-      const Bootstrap = getBootstrap();
-      if (!Bootstrap) {
-        console.error('Bootstrap is not loaded');
-        return;
-      }
-      this.modalInstance = new Bootstrap.Modal(this.modalElement.nativeElement, {
-        backdrop: 'static',
-        keyboard: false
-      });
-    }
-    
-    if (this.modalInstance) {
-      this.modalInstance.show();
-    }
+    this.modalInstance = Bootstrap.Modal.getOrCreateInstance(this.modalElement.nativeElement, {
+      backdrop: 'static',
+      keyboard: false
+    });
+    this.modalInstance.show();
   }
 
   closeModal(): void {
@@ -167,7 +154,7 @@ export class LoginModal implements OnInit, AfterViewInit {
     if (remember) localStorage.setItem('remembered_email', user.email);
     else localStorage.removeItem('remembered_email');
 
-    this.closeModal();
+    this.authModalService.closeLoginModal();
     const target = this.returnUrl && this.returnUrl.startsWith('/') ? this.returnUrl : '/perfil';
     this.router.navigateByUrl(target).finally(() => {
       this.loading = false;
@@ -175,7 +162,6 @@ export class LoginModal implements OnInit, AfterViewInit {
   }
 
   switchToRegister(): void {
-    this.closeModal();
     this.authModalService.switchToRegister();
   }
 

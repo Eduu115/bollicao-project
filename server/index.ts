@@ -16,7 +16,6 @@ app.use("/api/clientes", clienteRoutes);
 app.use("/api/productos", productoRoutes);
 app.use("/api/compras", compraRoutes);
 
-// Conectar a MongoDB y arrancar el servidor
 conectarDB().then(() => {
     app.listen(3000, () => {
         console.log("Servidor arrancado en http://localhost:3000");
