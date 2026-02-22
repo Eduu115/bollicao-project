@@ -1,4 +1,4 @@
-/* ── Variables de la paleta del proyecto ── */
+
 :host {
     --bg-base: #1a0d14;
     --bg-mid: #2d1520;
@@ -15,7 +15,7 @@
     --shadow-rosa: rgba(232, 66, 122, 0.2);
 }
 
-/* ── Offcanvas base ── */
+
 .offcanvas {
     width: 300px !important;
     background: var(--bg-base);
@@ -23,7 +23,7 @@
     box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6), -2px 0 12px var(--shadow-rosa);
 }
 
-/* ── Header ── */
+
 .profile-header {
     background: linear-gradient(135deg, var(--bg-mid) 0%, var(--bg-base) 100%);
     padding: 1.5rem 1.25rem 1.25rem;
@@ -33,7 +33,7 @@
     overflow: hidden;
 }
 
-/* Decoración de fondo sutil */
+
 .profile-header::before {
     content: '';
     position: absolute;
@@ -52,7 +52,7 @@
     gap: 1rem;
 }
 
-/* ── Avatar ── */
+
 .avatar-circle {
     width: 54px;
     height: 54px;
@@ -77,7 +77,7 @@
     min-width: 0;
 }
 
-/* ── Título y email ── */
+
 .offcanvas-title {
     color: var(--text-light);
     font-size: 1rem;
@@ -93,7 +93,7 @@
     word-break: break-all;
 }
 
-/* Botón X de cierre */
+
 .btn-close {
     filter: invert(0.8) sepia(1) saturate(2) hue-rotate(290deg);
     opacity: 0.7;
@@ -104,7 +104,7 @@
     opacity: 1;
 }
 
-/* ── Nav links ── */
+
 .profile-nav {
     display: flex;
     flex-direction: column;
@@ -132,7 +132,7 @@
     border-left-color: var(--rosa-fuerte);
 }
 
-/* ── Icono de cada item ── */
+
 .profile-nav-icon {
     width: 34px;
     height: 34px;
@@ -154,7 +154,7 @@
     color: var(--rosa-fuerte);
 }
 
-/* Flecha derecha */
+
 .profile-nav-item .fa-chevron-right {
     font-size: 0.7rem;
     color: var(--text-muted);
@@ -166,14 +166,14 @@
     color: var(--rosa-fuerte);
 }
 
-/* ── Separador ── */
+
 .profile-divider {
     height: 1px;
     background: var(--border-rosa);
     margin: 0.25rem 1.25rem;
 }
 
-/* ── Botón Cerrar sesión ── */
+
 .profile-logout-btn {
     margin-top: 0.5rem;
     padding: 0.85rem 1.25rem;

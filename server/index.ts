@@ -7,7 +7,7 @@ import compraRoutes from "./routes/compras";
 
 const app = express();
 
-// Permite peticiones desde el frontend (Angular en dev: 4200, producción: ajustar)
+
 app.use(cors({
     origin: ["http://localhost:4200", "http://localhost:4000"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

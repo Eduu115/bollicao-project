@@ -2,15 +2,13 @@
     display: block;
     min-height: 100vh;
     background-color: var(--bg-base);
-    /* Match global dark theme */
     color: var(--text-light);
     font-family: 'Oxanium', sans-serif;
 }
 
-/* === Utility Wrappers === */
+
 .checkout-container {
     padding-top: 150px !important;
-    /* spacing below fixed navbar */
     padding-bottom: 80px;
 }
 
@@ -26,7 +24,7 @@
     border-color: var(--border-rosa) !important;
 }
 
-/* === Breadcrumb / Stepper === */
+
 .checkout-breadcrumb {
     font-size: 1.1rem;
     font-weight: 500;
@@ -72,7 +70,7 @@
     font-size: 0.9rem;
 }
 
-/* === Section Titles & Text === */
+
 .section-title {
     color: var(--text-light);
     font-size: 1.8rem;
@@ -85,7 +83,7 @@
     border-bottom: 1px solid var(--border-rosa);
 }
 
-/* === Options Cards === */
+
 .shipping-options {
     display: flex;
     flex-direction: column;
@@ -105,7 +103,6 @@
 
 .shipping-card.active {
     background-color: rgba(232, 66, 122, 0.08);
-    /* Pink highlight */
     border: 1px solid var(--rosa-fuerte);
     box-shadow: 0 0 10px rgba(232, 66, 122, 0.1);
 }
@@ -127,10 +124,9 @@
 
 .text-success {
     color: #10b981 !important;
-    /* Use a vibrant green that pops on dark bg */
 }
 
-/* === Buttons === */
+
 .btn-continuar,
 .btn-comprar {
     background-color: var(--rosa-fuerte);
@@ -170,9 +166,8 @@
     color: white;
 }
 
-/* === Right Column (Summary) === */
+
 .checkout-right {
-    /* Optional left border on desktop to match screenshot aesthetic roughly */
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -209,7 +204,6 @@
 
 .price-current {
     color: var(--rosa-fuerte) !important;
-    /* replace red with brand pink */
 }
 
 .summary-divider {
@@ -221,12 +215,12 @@
     color: var(--text-light);
 }
 
-/* === Summary Form (Step 3) === */
+
 .summary-box-standalone {
     background-color: var(--bg-card);
 }
 
-/* === Animations === */
+
 .fade-in {
     animation: fadeIn 0.4s ease-out;
 }
@@ -243,7 +237,7 @@
     }
 }
 
-/* === Form Controls (Accordion) === */
+
 .form-control {
     background-color: var(--bg-base) !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;

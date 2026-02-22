@@ -58,7 +58,6 @@ export class Carta implements OnInit, OnDestroy {
                 ? { categoria: this.categoriaActiva, disponible: true, noCache: true }
                 : { disponible: true, noCache: true };
 
-        // Añadimos un timeout y forzamos change detection para evitar bloqueos
         this.sub = this.apiService.getProductos(filtros)
             .pipe(timeout(10000))
             .subscribe({

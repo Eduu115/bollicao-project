@@ -1,6 +1,5 @@
 <div class="carta-page">
 
-    <!-- Hero -->
     <section class="carta-hero">
         <div class="carta-hero-content">
             <h1 class="carta-title">Nuestra Carta</h1>
@@ -8,7 +7,6 @@
         </div>
     </section>
 
-    <!-- Filtros por categoría -->
     <section class="carta-filtros container">
         <div class="filtros-wrap">
             @for (cat of categorias; track cat.id) {
@@ -19,7 +17,6 @@
         </div>
     </section>
 
-    <!-- Grid de productos -->
     <section class="carta-grid container">
 
         @if (cargando) {
@@ -82,23 +79,17 @@
 
     </section>
 
-    <!-- Toast -->
     @if (showToast) {
     <div class="position-fixed bottom-0 end-0 p-4 toast-pasteleria-wrapper">
-    
       <div class="toast toast-pasteleria show" role="alert" aria-live="assertive" aria-atomic="true">
-    
         <div class="toast-header toast-header-pasteleria">
           <strong class="me-auto">Notificación</strong>
           <button type="button" class="btn-close btn-close-white" (click)="showToast = false"aria-label="Close"></button>
         </div>
-    
         <div class="toast-body">
           {{ toastMessage }}
         </div>
-    
       </div>
-    
     </div>
 
 }

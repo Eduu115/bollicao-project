@@ -1,7 +1,6 @@
 <div class="perfil-page">
     <div class="container py-5">
 
-        <!-- Saldo / Puntos -->
         <div class="saldo-bar mb-4">
             <div>
                 <span class="saldo-label">Puntos acumulados</span>
@@ -15,7 +14,6 @@
 
         <div class="row g-4">
 
-            <!-- Sidebar -->
             <div class="col-lg-3">
                 <div class="perfil-sidebar">
                     <div class="perfil-info mb-4">
@@ -33,11 +31,9 @@
                 </div>
             </div>
 
-            <!-- Contenido principal -->
             <div class="col-lg-9">
                 <div class="perfil-card">
 
-                    <!-- TAB: Mis compras -->
                     @if (tabActiva === 'compras') {
                     <div class="perfil-tabs mb-4">
                         <h3 class="perfil-section-title">Mis compras</h3>
@@ -76,7 +72,6 @@
                     }
                     }
 
-                    <!-- TAB: Datos personales -->
                     @if (tabActiva === 'datos') {
                     <div class="perfil-tabs mb-4">
                         <h3 class="perfil-section-title">Datos personales</h3>

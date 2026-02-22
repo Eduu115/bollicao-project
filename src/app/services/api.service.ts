@@ -42,7 +42,6 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    // ── AUTH ──────────────────────────────────────────────────────────────────
 
     login(email: string, password: string): Observable<ICliente> {
         return this.http.post<ICliente>(`${this.base}/clientes/login`, { email, password });
@@ -52,7 +51,6 @@ export class ApiService {
         return this.http.post<ICliente>(`${this.base}/clientes/register`, { nombre, email, password });
     }
 
-    // ── CLIENTES ──────────────────────────────────────────────────────────────
 
     getClientes(): Observable<ICliente[]> {
         return this.http.get<ICliente[]>(`${this.base}/clientes`);
@@ -70,14 +68,13 @@ export class ApiService {
         return this.http.put<ICliente>(`${this.base}/clientes/${id}`, datos);
     }
 
-    // ── PRODUCTOS ─────────────────────────────────────────────────────────────
 
     getProductos(filtros?: { categoria?: string; disponible?: boolean; noCache?: boolean }): Observable<IProducto[]> {
         let url = `${this.base}/productos`;
         const params: string[] = [];
         if (filtros?.categoria) params.push(`categoria=${filtros.categoria}`);
         if (filtros?.disponible !== undefined) params.push(`disponible=${filtros.disponible}`);
-        if (filtros?.noCache) params.push(`_t=${Date.now()}`); // Evita caché de SSR/HttpClient
+        if (filtros?.noCache) params.push(`_t=${Date.now()}`); 
         if (params.length) url += `?${params.join('&')}`;
         return this.http.get<IProducto[]>(url);
     }
@@ -86,7 +83,6 @@ export class ApiService {
         return this.http.get<IProducto>(`${this.base}/productos/${id}`);
     }
 
-    // ── COMPRAS ───────────────────────────────────────────────────────────────
 
     getCompras(): Observable<ICompra[]> {
         return this.http.get<ICompra[]>(`${this.base}/compras`);

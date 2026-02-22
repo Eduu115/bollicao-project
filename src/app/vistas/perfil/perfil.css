@@ -5,7 +5,7 @@
     padding-top: 110px;
 }
 
-/* Barra de saldo */
+
 .saldo-bar {
     background: #1e0f18;
     border: 1px solid #3d2030;
@@ -46,7 +46,7 @@
     font-weight: 500;
 }
 
-/* Sidebar */
+
 .perfil-sidebar {
     background: #1e0f18;
     border: 1px solid #3d2030;
@@ -97,7 +97,7 @@
     border-left: 3px solid #c9a0b4;
 }
 
-/* Card principal */
+
 .perfil-card {
     background: #1e0f18;
     border: 1px solid #3d2030;
@@ -106,7 +106,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
 
-/* Tabs header */
+
 .perfil-tabs {
     display: flex;
     justify-content: space-between;
@@ -122,7 +122,7 @@
     margin: 0;
 }
 
-/* Pedidos */
+
 .pedidos-list {
     display: flex;
     flex-direction: column;
@@ -226,7 +226,7 @@
     color: #f9d4e4;
 }
 
-/* Datos personales */
+
 .datos-personales {
     display: flex;
     flex-direction: column;
@@ -255,7 +255,7 @@
     color: #f0dde6;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
     .saldo-bar {
         flex-direction: column;

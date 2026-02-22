@@ -1,4 +1,4 @@
-/* ── Variables de la paleta del proyecto (Igual que Profile) ── */
+
 :host {
     --bg-base: #1a0d14;
     --bg-mid: #2d1520;
@@ -14,21 +14,19 @@
     --border-pastel: rgba(244, 184, 208, 0.2);
     --shadow-rosa: rgba(232, 66, 122, 0.2);
 
-    /* Variables específicas del carrito */
     --verde-bershka: #008060;
     --verde-bershka-hover: #00664d;
 }
 
-/* ── Offcanvas base ── */
+
 .offcanvas {
     width: 380px !important;
-    /* Un poco más ancho para las imágenes de productos */
     background: var(--bg-base);
     border-left: 1px solid var(--border-rosa);
     box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6), -2px 0 12px var(--shadow-rosa);
 }
 
-/* ── Header ── */
+
 .cart-header {
     background: linear-gradient(135deg, var(--bg-mid) 0%, var(--bg-base) 100%);
     padding: 1.5rem 1.25rem 1.25rem;
@@ -38,7 +36,7 @@
     overflow: hidden;
 }
 
-/* Decoración de fondo sutil */
+
 .cart-header::before {
     content: '';
     position: absolute;
@@ -57,7 +55,7 @@
     gap: 1rem;
 }
 
-/* ── Avatar / Icono Carrito ── */
+
 .avatar-circle.cart-icon-circle {
     width: 54px;
     height: 54px;
@@ -94,7 +92,7 @@
     font-size: 0.85rem;
 }
 
-/* Botón X de cierre */
+
 .btn-close {
     filter: invert(0.8) sepia(1) saturate(2) hue-rotate(290deg);
     opacity: 0.7;
@@ -105,7 +103,7 @@
     opacity: 1;
 }
 
-/* ── Lista de Productos (Cuerpo) ── */
+
 .cart-items-container {
     padding: 1rem 0;
 }
@@ -175,14 +173,13 @@
     align-items: center;
 }
 
-/* Estilo para el ícono 'check' simulando 'Añadido' resuelto */
+
 .text-success {
     color: #10b981 !important;
-    /* Verde vibrante para hacer contraste o mantener estética Bershka */
     font-size: 1.1rem;
 }
 
-/* Carrito vacío */
+
 .empty-cart-message {
     display: flex;
     flex-direction: column;
@@ -200,7 +197,7 @@
     color: rgba(232, 66, 122, 0.3);
 }
 
-/* ── Footer / Botón Final ── */
+
 .cart-footer {
     background: var(--bg-mid);
     padding: 1.5rem;

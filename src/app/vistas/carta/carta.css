@@ -1,4 +1,4 @@
-/* ── Página Carta ───────────────────────────────────────────────────────── */
+
 
 .carta-page {
     min-height: 100vh;
@@ -7,7 +7,7 @@
     padding-bottom: 4rem;
 }
 
-/* ── Hero ─────────────────────────────────────────────────────────────── */
+
 
 .carta-hero {
     width: 100%;
@@ -31,7 +31,7 @@
     margin: 0;
 }
 
-/* ── Filtros ──────────────────────────────────────────────────────────── */
+
 
 .carta-filtros {
     padding: 2rem 1rem 0.5rem;
@@ -68,7 +68,7 @@
     transform: scale(1.04);
 }
 
-/* ── Grid ─────────────────────────────────────────────────────────────── */
+
 
 .carta-grid {
     padding-top: 2.5rem;
@@ -80,7 +80,7 @@
     gap: 1.2rem;
 }
 
-/* ── Tarjeta de producto ─────────────────────────────────────────────── */
+
 
 .producto-card {
     background: #2d1520;
@@ -122,7 +122,7 @@
     gap: 0.3rem;
 }
 
-/* Responsive: 4 cols en tablets, 2 en móvil */
+
 @media (max-width: 1200px) {
     .productos-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -238,7 +238,7 @@
     padding: 0.15rem 0.6rem;
 }
 
-/* ── Estados: loading, error, vacío ─────────────────────────────────── */
+
 
 .carta-loading,
 .carta-error,
@@ -266,7 +266,7 @@
 }
 
 
-/* ── Toast ─────────────────────────────────── */
+
 
 .toast-pasteleria-wrapper {
   z-index: 1055;

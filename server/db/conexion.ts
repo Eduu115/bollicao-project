@@ -12,7 +12,6 @@ export async function conectarDB(): Promise<void> {
     }
 }
 
-// Eventos de conexión
 mongoose.connection.on('disconnected', () => {
     console.warn('MongoDB desconectado');
 });

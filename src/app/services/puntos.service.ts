@@ -17,7 +17,7 @@ export interface Usuario {
     pedidos: Pedido[];
 }
 
-// Regla: 1 punto por cada 10€ gastados
+
 const EUROS_POR_PUNTO = 10;
 
 @Injectable({
@@ -57,22 +57,18 @@ export class PuntosService {
     this.saveUsuario(usuario);
   }
 
-  // ✅ NUEVO: borra el usuario actual (útil para logout)
   clearUsuarioActual(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     localStorage.removeItem('currentUser');
   }
 
-  // Calcula los puntos acumulados en base al total gastado
   calcularPuntos(totalGastado: number): number {
     return Math.floor(totalGastado / EUROS_POR_PUNTO);
   }
 
-    // Añade un pedido y recalcula los puntos
     añadirPedido(descripcion: string, total: number): void {
         let usuario = this.getUsuario();
         if (!usuario) {
-            // Si no existe, lo creamos con datos por defecto
             usuario = { nombre: 'Eduardo', email: 'serranofernandoe@gmail.com', totalGastado: 0, pedidos: [] };
         }
 
@@ -86,7 +82,7 @@ export class PuntosService {
             puntos: puntosPedido
         };
 
-        usuario.pedidos.unshift(nuevoPedido); // añade al inicio
+        usuario.pedidos.unshift(nuevoPedido); 
         usuario.totalGastado = (usuario.totalGastado || 0) + total;
         this.saveUsuario(usuario);
     }

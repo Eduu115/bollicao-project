@@ -1,4 +1,4 @@
-/* main.css */
+
 :host {
   display: block;
 }
@@ -8,7 +8,7 @@
 }
 
 
-/* Base Sections */
+
 .bg-white {
   background-color: transparent !important;
 }
@@ -18,7 +18,7 @@
   margin: 0 auto;
 }
 
-/* Common Typography & Separators */
+
 .section-title {
   color: #f4b8d0;
   font-size: 2.8rem;
@@ -47,7 +47,7 @@
   color: #c9a0b4 !important;
 }
 
-/* Common Buttons */
+
 .btn-pink {
   background-color: transparent;
   color: #fce8f0;
@@ -68,7 +68,7 @@
   color: #f4b8d0 !important;
 }
 
-/* Feature Strip */
+
 .feature-strip {
   background: rgba(0, 0, 0, 0.15);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -90,7 +90,7 @@
   color: #fce8f0;
 }
 
-/* Categories */
+
 .category-card {
   background-color: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);
@@ -142,7 +142,7 @@
   background-image: url('/img/laForjaDelAzucarHero.png');
 }
 
-/* Back to Top Button */
+
 .btn-outline-up {
   color: #f4b8d0;
   border: 1px solid rgba(244, 184, 208, 0.5);
@@ -163,7 +163,7 @@
   color: #fce8f0;
 }
 
-/* Store Strip */
+
 .store-strip {
   background: rgba(0, 0, 0, 0.2);
   border-top: 1px solid rgba(232, 66, 122, 0.2);
@@ -171,7 +171,7 @@
   color: #fce8f0;
 }
 
-/* Store Cards */
+
 .store-card {
   background-color: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(10px);

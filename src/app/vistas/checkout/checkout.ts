@@ -14,7 +14,6 @@ import { ApiService } from '../../services/api.service';
 })
 export class Checkout implements OnInit {
 
-  // 1: Envío, 2: Pago, 3: Resumen
   currentStep: number = 1;
   selectedShipping: number | null = null;
   selectedPayment: number | null = null;
@@ -36,7 +35,6 @@ export class Checkout implements OnInit {
     }
   }
 
-  /** Líneas reales del carrito (sustituye al array mock) */
   get items(): LineaCarrito[] {
     return this.carrito.lineas;
   }
@@ -73,7 +71,7 @@ export class Checkout implements OnInit {
 
   getShippingCost(): number {
     if (this.selectedShipping === 2) return 4.00;
-    return 0; // Recogida en tienda: gratis
+    return 0; 
   }
 
   getTotal(): number {
@@ -110,16 +108,13 @@ export class Checkout implements OnInit {
 
     this.api.createCompra(payload).subscribe({
       next: (compraCreada) => {
-        // Limpiar carrito
         this.carrito.limpiar();
 
-        // Actualizar la sesión con los datos frescos del servidor (puntos, totalGastado)
         this.api.getCliente(usuario._id).subscribe(clienteActualizado => {
           this.session.setSession(clienteActualizado);
         });
 
         this.comprando = false;
-        // Redirigir al perfil para que el usuario vea su compra
         this.router.navigate(['/perfil']);
       },
       error: (err) => {

@@ -3,7 +3,7 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { SessionService, SessionUser } from '../../services/session.service';
 import { ApiService, ICompra } from '../../services/api.service';
 
-// Tipo local que mapea ICompra a lo que necesita el template
+
 export interface PedidoView {
     id: string;
     fecha: string;
@@ -45,12 +45,10 @@ export class Perfil implements OnInit {
         this.apiService.getClienteConCompras(this.session._id).subscribe({
             next: ({ compras }) => {
                 this.pedidos = compras.map(c => this.mapCompra(c));
-                // Actualiza puntos y gastado desde el servidor
                 if (this.session) {
                     this.apiService.getCliente(this.session._id).subscribe(cliente => {
                         if (this.session) {
                             this.session = { ...this.session, puntosTotales: cliente.puntosTotales, totalGastado: cliente.totalGastado };
-                            // Actualiza sessionStorage con datos frescos del servidor
                             this.sessionService.setSession(cliente);
                         }
                     });

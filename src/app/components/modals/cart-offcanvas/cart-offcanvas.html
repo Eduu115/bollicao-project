@@ -1,7 +1,6 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" #cartOffcanvas id="cartOffcanvas"
     aria-labelledby="cartOffcanvasLabel">
 
-    <!-- Header del offcanvas -->
     <div class="offcanvas-header cart-header">
         <div class="cart-header-content">
             <div class="avatar-circle cart-icon-circle">
@@ -16,10 +15,8 @@
             aria-label="Cerrar"></button>
     </div>
 
-    <!-- Cuerpo del offcanvas -->
     <div class="offcanvas-body p-0 d-flex flex-column">
 
-        <!-- Lista de Productos -->
         <div class="cart-items-container flex-grow-1 overflow-auto">
             @if (cartItems.length > 0) {
             @for (item of cartItems; track item.producto._id) {
@@ -49,7 +46,6 @@
             }
         </div>
 
-        <!-- Footer / Checkout Button -->
         <div class="cart-footer">
             <div class="cart-total d-flex justify-content-between mb-3">
                 <span class="fw-semibold text-light">Total:</span>

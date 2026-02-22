@@ -1,7 +1,6 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" #profileOffcanvas id="profileOffcanvas"
     aria-labelledby="profileOffcanvasLabel">
 
-    <!-- Header del offcanvas -->
     <div class="offcanvas-header profile-header">
         <div class="profile-header-content">
             <div class="avatar-circle">{{ userInitial }}</div>
@@ -14,7 +13,6 @@
             aria-label="Cerrar"></button>
     </div>
 
-    <!-- Cuerpo del offcanvas -->
     <div class="offcanvas-body p-0">
 
         <nav class="profile-nav">
@@ -34,7 +32,6 @@
 
         <div class="profile-divider"></div>
 
-        <!-- Logout -->
         <button class="profile-logout-btn w-100" (click)="logout()">
             <i class="fa-solid fa-right-from-bracket me-2"></i>
             Cerrar sesión
