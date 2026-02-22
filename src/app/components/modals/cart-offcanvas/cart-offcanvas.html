@@ -22,14 +22,22 @@
         <!-- Lista de Productos -->
         <div class="cart-items-container flex-grow-1 overflow-auto">
             @if (cartItems.length > 0) {
-            @for (item of cartItems; track item.id) {
+            @for (item of cartItems; track item.producto._id) {
             <div class="cart-item">
                 <div class="cart-item-details">
-                    <h6 class="cart-item-title">{{ item.nombre }}</h6>
-                    <span class="cart-item-price">{{ item.precio | number:'1.2-2' }} €</span>
+                    <h6 class="cart-item-title">{{ item.producto.nombre }}</h6>
+                    <span class="cart-item-price">
+                        {{ item.producto.precio * item.cantidad | number:'1.2-2' }} €
+                        @if (item.cantidad > 1) {
+                        <small class="text-muted ms-1">(x{{ item.cantidad }})</small>
+                        }
+                    </span>
                 </div>
                 <div class="cart-item-status">
-                    <i class="fa-solid fa-check text-success"></i>
+                    <button class="btn btn-sm btn-link text-danger p-0" title="Eliminar"
+                        (click)="quitarLinea(item.producto._id)">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
             </div>
             }
@@ -47,9 +55,12 @@
                 <span class="fw-semibold text-light">Total:</span>
                 <span class="fw-bold fs-5 total-price">{{ getTotalPrice() | number:'1.2-2' }} €</span>
             </div>
-            <button class="btn w-100 btn-tramitar-pedido" (click)="checkout()">
+            <button class="btn w-100 btn-tramitar-pedido" (click)="checkout()" [disabled]="cartItems.length === 0">
                 TRAMITAR PEDIDO
             </button>
+            <p class="text-muted text-center mt-2 mb-0" style="font-size: 0.75rem;">
+                * Es necesario iniciar sesión y estar registrado para hacer la compra
+            </p>
         </div>
 
     </div>

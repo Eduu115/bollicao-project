@@ -25,18 +25,18 @@ export class SessionService {
             puntosTotales: cliente.puntosTotales ?? 0,
             totalGastado: cliente.totalGastado ?? 0,
         };
-        sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
     }
 
     getSession(): SessionUser | null {
         if (!isPlatformBrowser(this.platformId)) return null;
-        const raw = sessionStorage.getItem(SESSION_KEY);
+        const raw = localStorage.getItem(SESSION_KEY);
         return raw ? JSON.parse(raw) : null;
     }
 
     clearSession(): void {
         if (!isPlatformBrowser(this.platformId)) return;
-        sessionStorage.removeItem(SESSION_KEY);
+        localStorage.removeItem(SESSION_KEY);
     }
 
     isLoggedIn(): boolean {

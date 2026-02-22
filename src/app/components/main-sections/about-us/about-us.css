@@ -1,0 +1,29 @@
+.extra-pt {
+    padding-top: 8rem !important;
+    padding-bottom: 6rem !important;
+}
+
+.value-card {
+    background-color: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.value-title {
+    color: #fce8f0;
+    font-size: 1.2rem;
+}
+
+.value-text {
+    font-size: 1rem;
+    color: #e5ccd8;
+    line-height: 1.8;
+}
+
+.card-separator {
+    width: 30px;
+    height: 3px;
+    background-color: #e8427a;
+}

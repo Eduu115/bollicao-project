@@ -72,11 +72,12 @@ export class ApiService {
 
     // ── PRODUCTOS ─────────────────────────────────────────────────────────────
 
-    getProductos(filtros?: { categoria?: string; disponible?: boolean }): Observable<IProducto[]> {
+    getProductos(filtros?: { categoria?: string; disponible?: boolean; noCache?: boolean }): Observable<IProducto[]> {
         let url = `${this.base}/productos`;
         const params: string[] = [];
         if (filtros?.categoria) params.push(`categoria=${filtros.categoria}`);
         if (filtros?.disponible !== undefined) params.push(`disponible=${filtros.disponible}`);
+        if (filtros?.noCache) params.push(`_t=${Date.now()}`); // Evita caché de SSR/HttpClient
         if (params.length) url += `?${params.join('&')}`;
         return this.http.get<IProducto[]>(url);
     }

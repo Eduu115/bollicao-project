@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Compra } from '../models/Compra';
+import { Cliente } from '../models/Cliente';
 
 const compraController = {
 
@@ -37,6 +38,15 @@ const compraController = {
         try {
             const nuevaCompra = new Compra(req.body);
             const compraGuardada = await nuevaCompra.save();
+
+            // Acumular puntos y total gastado en el cliente
+            await Cliente.findByIdAndUpdate(compraGuardada.cliente, {
+                $inc: {
+                    puntosTotales: compraGuardada.puntosGenerados,
+                    totalGastado: compraGuardada.total,
+                },
+            });
+
             // Devolvemos con populate para que el cliente vea los datos completos
             const compraDetalle = await Compra.findById(compraGuardada._id)
                 .populate('cliente', 'nombre email')

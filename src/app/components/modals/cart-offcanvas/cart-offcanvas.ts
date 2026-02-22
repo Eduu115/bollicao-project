@@ -3,20 +3,17 @@ import { isPlatformBrowser, CommonModule, DecimalPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartOffcanvasService } from '../../../services/cart-offcanvas.service';
+import { CarritoService, LineaCarrito } from '../../../services/carrito.service';
+
+import { AuthModalService } from '../../../services/auth-modal.service';
+import { SessionService } from '../../../services/session.service';
 
 declare var bootstrap: any;
-
-interface CartItemDummy {
-  id: number;
-  nombre: string;
-  precio: number;
-  imagen?: string;
-}
 
 @Component({
   selector: 'app-cart-offcanvas',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DecimalPipe],
   templateUrl: './cart-offcanvas.html',
   styleUrl: './cart-offcanvas.css',
 })
@@ -25,19 +22,18 @@ export class CartOffcanvas implements OnInit, AfterViewInit, OnDestroy {
   private offcanvasInstance: any = null;
   private sub: Subscription = new Subscription();
 
-
-
-  //de prueba, se quitan y ya esta
-  cartItems: CartItemDummy[] = [
-    { id: 1, nombre: 'Tarta de Fresa Premium', precio: 35.99, imagen: '/img/placeholder.png' },
-    { id: 2, nombre: 'Donuts de Caramelo Salado', precio: 12.50, imagen: '/img/placeholder.png' }
-  ];
-
   constructor(
     private cartOffcanvasService: CartOffcanvasService,
+    public carrito: CarritoService,
     private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private sessionService: SessionService,
+    private authModalService: AuthModalService
   ) { }
+
+  get cartItems(): LineaCarrito[] {
+    return this.carrito.lineas;
+  }
 
   ngOnInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -78,16 +74,24 @@ export class CartOffcanvas implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getTotalItems(): number {
-    return this.cartItems.length;
+    return this.carrito.totalItems;
   }
 
   getTotalPrice(): number {
-    return this.cartItems.reduce((total, item) => total + item.precio, 0);
+    return this.carrito.total;
+  }
+
+  quitarLinea(productoId: string): void {
+    this.carrito.quitar(productoId);
   }
 
   checkout(): void {
     this.close();
-    this.router.navigate(['/checkout']);
+    if (!this.sessionService.isLoggedIn()) {
+      this.authModalService.openLoginModal();
+    } else {
+      this.router.navigate(['/checkout']);
+    }
   }
 
   private getBootstrap(): any {

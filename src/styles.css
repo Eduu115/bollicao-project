@@ -38,3 +38,26 @@ body {
     background-color: var(--bg-dark);
     color: var(--text-light);
 }
+
+/* Fix visibilidad en el componente Main y sus sub-secciones oscuras */
+.main-light .text-muted,
+.main-light .section-subtitle,
+.main-light .store-hours,
+.main-light .value-text,
+.main-light .feature-text {
+    color: var(--text-muted, #c9a0b4) !important;
+}
+
+.main-light h1,
+.main-light h2,
+.main-light h3,
+.main-light h4,
+.main-light h5,
+.main-light h6 {
+    color: var(--text-light, #fce8f0) !important;
+}
+
+/* Forzar que los párrafos dentro de estas secciones también sean legibles */
+.main-light p {
+    color: var(--text-muted, #c9a0b4);
+}
