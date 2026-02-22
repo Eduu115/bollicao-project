@@ -1,0 +1,199 @@
+/* ── Variables de la paleta del proyecto ── */
+:host {
+    --bg-base: #1a0d14;
+    --bg-mid: #2d1520;
+    --bg-card: #261018;
+    --rosa-pastel: #f4b8d0;
+    --rosa-pastel-2: #f9d4e4;
+    --rosa-fuerte: #e8427a;
+    --rosa-medio: #d4688e;
+    --rosa-oscuro: #b03060;
+    --text-light: #fce8f0;
+    --text-muted: #c9a0b4;
+    --border-rosa: rgba(232, 66, 122, 0.3);
+    --border-pastel: rgba(244, 184, 208, 0.2);
+    --shadow-rosa: rgba(232, 66, 122, 0.2);
+}
+
+/* ── Offcanvas base ── */
+.offcanvas {
+    width: 300px !important;
+    background: var(--bg-base);
+    border-left: 1px solid var(--border-rosa);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.6), -2px 0 12px var(--shadow-rosa);
+}
+
+/* ── Header ── */
+.profile-header {
+    background: linear-gradient(135deg, var(--bg-mid) 0%, var(--bg-base) 100%);
+    padding: 1.5rem 1.25rem 1.25rem;
+    border-bottom: 1px solid var(--border-rosa);
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración de fondo sutil */
+.profile-header::before {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(232, 66, 122, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.profile-header-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* ── Avatar ── */
+.avatar-circle {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--rosa-fuerte), var(--rosa-oscuro));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow:
+        0 4px 16px var(--shadow-rosa),
+        0 0 0 3px rgba(232, 66, 122, 0.25);
+}
+
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+/* ── Título y email ── */
+.offcanvas-title {
+    color: var(--text-light);
+    font-size: 1rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-email {
+    color: var(--text-muted);
+    font-size: 0.76rem;
+    word-break: break-all;
+}
+
+/* Botón X de cierre */
+.btn-close {
+    filter: invert(0.8) sepia(1) saturate(2) hue-rotate(290deg);
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.btn-close:hover {
+    opacity: 1;
+}
+
+/* ── Nav links ── */
+.profile-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0;
+}
+
+.profile-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.8rem 1.25rem;
+    color: var(--rosa-pastel);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease, padding-left 0.25s ease;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+}
+
+.profile-nav-item:hover {
+    background: rgba(232, 66, 122, 0.1);
+    color: var(--rosa-fuerte);
+    padding-left: 1.6rem;
+    border-left-color: var(--rosa-fuerte);
+}
+
+/* ── Icono de cada item ── */
+.profile-nav-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    background: rgba(232, 66, 122, 0.12);
+    border: 1px solid var(--border-pastel);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    color: var(--rosa-medio);
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.profile-nav-item:hover .profile-nav-icon {
+    background: rgba(232, 66, 122, 0.25);
+    border-color: var(--border-rosa);
+    color: var(--rosa-fuerte);
+}
+
+/* Flecha derecha */
+.profile-nav-item .fa-chevron-right {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: transform 0.2s, color 0.2s;
+}
+
+.profile-nav-item:hover .fa-chevron-right {
+    transform: translateX(3px);
+    color: var(--rosa-fuerte);
+}
+
+/* ── Separador ── */
+.profile-divider {
+    height: 1px;
+    background: var(--border-rosa);
+    margin: 0.25rem 1.25rem;
+}
+
+/* ── Botón Cerrar sesión ── */
+.profile-logout-btn {
+    margin-top: 0.5rem;
+    padding: 0.85rem 1.25rem;
+    background: transparent;
+    border: none;
+    color: #f87171;
+    font-size: 0.92rem;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, padding-left 0.25s;
+    border-left: 2px solid transparent;
+    width: 100%;
+}
+
+.profile-logout-btn:hover {
+    background: rgba(248, 113, 113, 0.1);
+    color: #fca5a5;
+    padding-left: 1.6rem;
+    border-left-color: #f87171;
+}

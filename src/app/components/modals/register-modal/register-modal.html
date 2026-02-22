@@ -1,4 +1,5 @@
-<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true" #registerModal>
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true"
+  #registerModal>
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content modal-pastel">
       <div class="modal-header border-0 pb-0">
@@ -13,25 +14,34 @@
         <div class="card card-pastel p-4">
           <form [formGroup]="form" (ngSubmit)="submit()">
             @if (errorMessage) {
-              <div class="alert alert-danger py-2" role="alert">
-                {{ errorMessage }}
-              </div>
+            <div class="alert alert-danger py-2" role="alert">
+              {{ errorMessage }}
+            </div>
             }
             <div class="row g-3">
               <div class="col-12">
-                <label class="form-label" for="email">Correo electrónico</label>
-                <input id="email" type="email" class="form-control" placeholder="admin@test.com"
+                <label class="form-label" for="reg-nombre">Nombre completo</label>
+                <input id="reg-nombre" type="text" class="form-control" placeholder="Tu nombre" formControlName="nombre"
+                  required>
+              </div>
+
+              <div class="col-12">
+                <label class="form-label" for="reg-email">Correo electrónico</label>
+                <input id="reg-email" type="email" class="form-control" placeholder="correo@ejemplo.com"
                   formControlName="email" required>
               </div>
 
               <div class="col-12">
-                <label class="form-label" for="password">Contraseña</label>
-                <input id="password" type="password" class="form-control" placeholder="******"
+                <label class="form-label" for="reg-password">Contraseña</label>
+                <input id="reg-password" type="password" class="form-control" placeholder="******"
                   formControlName="password" required>
               </div>
 
               <div class="col-12 mt-2">
-                <button type="submit" class="btn btn-cupcake text-white w-100 py-2" [disabled]="form.invalid"> Registrarse </button>
+                <button type="submit" class="btn btn-cupcake text-white w-100 py-2"
+                  [disabled]="form.invalid || loading">
+                  @if (loading) { <span class="spinner-border spinner-border-sm me-2"></span> } Registrarse
+                </button>
 
                 <div class="text-center mt-3">
                   <span class="text-muted">¿Ya tienes cuenta?</span>

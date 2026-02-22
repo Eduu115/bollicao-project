@@ -1,0 +1,102 @@
+/* ── Unauthorized 401 ───────────────────────────────────────────────────── */
+
+.unauth-page {
+    min-height: 100vh;
+    background: var(--bg-dark, #1a0d14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.unauth-card {
+    text-align: center;
+    max-width: 460px;
+    width: 100%;
+    background: #2d1520;
+    border: 1px solid rgba(232, 66, 122, 0.2);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    animation: fadeUp 0.5s ease both;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.unauth-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(232, 66, 122, 0.12);
+    border: 1.5px solid rgba(232, 66, 122, 0.35);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #e8427a;
+    margin-bottom: 1.5rem;
+}
+
+.unauth-code {
+    font-size: 5rem;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, #e8427a, #f4b8d0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.unauth-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fce8f0;
+    margin-bottom: 1rem;
+}
+
+.unauth-desc {
+    font-size: 0.95rem;
+    color: #c9a0b4;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.unauth-actions {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #e8427a;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+}
+
+.btn-home:hover {
+    background: #d13060;
+    transform: scale(1.03);
+    color: #fff;
+}

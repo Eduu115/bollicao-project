@@ -1,0 +1,84 @@
+<div class="carta-page">
+
+    <!-- Hero -->
+    <section class="carta-hero">
+        <div class="carta-hero-content">
+            <h1 class="carta-title">Nuestra Carta</h1>
+            <p class="carta-subtitle">Hecho con amor, horneado cada día</p>
+        </div>
+    </section>
+
+    <!-- Filtros por categoría -->
+    <section class="carta-filtros container">
+        <div class="filtros-wrap">
+            @for (cat of categorias; track cat.id) {
+            <button class="filtro-btn" [class.active]="categoriaActiva === cat.id" (click)="filtrarPor(cat.id)">
+                {{ cat.label }}
+            </button>
+            }
+        </div>
+    </section>
+
+    <!-- Grid de productos -->
+    <section class="carta-grid container">
+
+        @if (cargando) {
+        <div class="carta-loading">
+            <span class="spinner-border" role="status"></span>
+            <p>Cargando carta…</p>
+        </div>
+        }
+
+        @if (error) {
+        <div class="carta-error">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <p>{{ error }}</p>
+        </div>
+        }
+
+        @if (!cargando && !error) {
+        @if (productos.length === 0) {
+        <div class="carta-empty">
+            <i class="fa-solid fa-cookie-bite"></i>
+            <p>No hay productos en esta categoría.</p>
+        </div>
+        } @else {
+        <div class="productos-grid">
+            @for (p of productos; track p._id) {
+            <div class="producto-card">
+                @if (p.imagen) {
+                <div class="producto-img" [style.background-image]="'url(' + p.imagen + ')'"></div>
+                } @else {
+                <div class="producto-img producto-img--placeholder">
+                    <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                }
+                <div class="producto-body">
+                    <span class="producto-cat">{{ p.categoria }}</span>
+                    <h3 class="producto-nombre">{{ p.nombre }}</h3>
+                    @if (p.descripcion) {
+                    <p class="producto-desc">{{ p.descripcion }}</p>
+                    }
+                    <div class="producto-footer">
+                        <span class="producto-precio">{{ p.precio.toFixed(2) }} €</span>
+                        @if (p.stock === 0) {
+                        <span class="producto-agotado">Agotado</span>
+                        }
+                    </div>
+                    <button class="btn-carrito" [class.btn-carrito--added]="addedIds.has(p._id)"
+                        [disabled]="p.stock === 0" (click)="addToCart(p)">
+                        @if (addedIds.has(p._id)) {
+                        <i class="fa-solid fa-check"></i> Añadido
+                        } @else {
+                        <i class="fa-solid fa-cart-plus"></i> Añadir
+                        }
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+        }
+        }
+
+    </section>
+</div>

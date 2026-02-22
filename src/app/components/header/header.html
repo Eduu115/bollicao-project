@@ -12,22 +12,19 @@
           <a class="nav-link fw-semibold" href="#inicio">Inicio</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#nosotros">Nosotros</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#productos">Productos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#contacto">Contáctanos</a>
+          <a class="nav-link" href="#carta">Carta</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="openRegisterModal()" style="cursor: pointer;"> Suscribirse </a>
+          <a class="nav-link" href="#contacto">Contáctanos</a>
         </li>
       </ul>
     </div>
 
     <div class="header-icons">
-      <div class="carrito-circle" routerLink="/perfil">
+      <div class="carrito-circle" (click)="onProfileClick()" style="cursor: pointer;">
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="carrito-circle">

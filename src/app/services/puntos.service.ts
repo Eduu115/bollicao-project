@@ -33,42 +33,46 @@ export class PuntosService {
         return raw ? JSON.parse(raw) : null;
     }
 
-    private saveUsuario(usuario: Usuario): void {
-        if (!isPlatformBrowser(this.platformId)) return;
-        localStorage.setItem('currentUser', JSON.stringify(usuario));
-    }
+     private saveUsuario(usuario: Usuario): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    localStorage.setItem('currentUser', JSON.stringify(usuario));
+  }
 
-    setUsuarioActual(email: string, nombre?: string): void {
-        if (!isPlatformBrowser(this.platformId)) return;
+  setUsuarioActual(email: string, nombre?: string): void {
+    if (!isPlatformBrowser(this.platformId)) return;
 
-        const normalizedEmail = (email || '').trim();
-        if (!normalizedEmail) return;
+    const normalizedEmail = (email || '').trim();
+    if (!normalizedEmail) return;
 
-        const existente = this.getUsuario();
-        if (existente && existente.email === normalizedEmail) return;
+    const existente = this.getUsuario();
+    if (existente && existente.email === normalizedEmail) return;
 
-        const usuario: Usuario = {
-            nombre: nombre ?? this.nombreDesdeEmail(normalizedEmail),
-            email: normalizedEmail,
-            totalGastado: 0,
-            pedidos: []
-        };
+    const usuario: Usuario = {
+      nombre: nombre ?? this.nombreDesdeEmail(normalizedEmail),
+      email: normalizedEmail,
+      totalGastado: 0,
+      pedidos: []
+    };
 
-        this.saveUsuario(usuario);
-    }
+    this.saveUsuario(usuario);
+  }
 
-    clearUsuarioActual(): void {
-        if (!isPlatformBrowser(this.platformId)) return;
-        localStorage.removeItem('currentUser');
-    }
+  // ✅ NUEVO: borra el usuario actual (útil para logout)
+  clearUsuarioActual(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    localStorage.removeItem('currentUser');
+  }
 
-    calcularPuntos(totalGastado: number): number {
-        return Math.floor(totalGastado / EUROS_POR_PUNTO);
-    }
+  // Calcula los puntos acumulados en base al total gastado
+  calcularPuntos(totalGastado: number): number {
+    return Math.floor(totalGastado / EUROS_POR_PUNTO);
+  }
 
+    // Añade un pedido y recalcula los puntos
     añadirPedido(descripcion: string, total: number): void {
         let usuario = this.getUsuario();
         if (!usuario) {
+            // Si no existe, lo creamos con datos por defecto
             usuario = { nombre: 'Eduardo', email: 'serranofernandoe@gmail.com', totalGastado: 0, pedidos: [] };
         }
 
