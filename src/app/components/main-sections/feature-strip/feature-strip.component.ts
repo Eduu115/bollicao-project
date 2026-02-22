@@ -1,0 +1,11 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+@Component({
+    selector: 'app-feature-strip',
+    standalone: true,
+    imports: [CommonModule],
+    templateUrl: './feature-strip.html',
+    styleUrl: './feature-strip.css'
+})
+export class FeatureStripComponent { }

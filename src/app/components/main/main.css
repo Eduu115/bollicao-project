@@ -5,28 +5,20 @@
 
 .main-light {
   background: linear-gradient(120deg, #1a0d14 0%, #2d1520 50%, #3d1e2c 100%);
-  color: #fce8f0;
 }
 
-/* Base Sections now transparent/dark */
+
+/* Base Sections */
 .bg-white {
   background-color: transparent !important;
 }
 
-/* Custom layout classes per user request */
 .container-wide {
   max-width: 1400px;
-  /* Adjust this value to make it wider/narrower */
   margin: 0 auto;
 }
 
-.extra-pt {
-  padding-top: 8rem !important;
-  padding-bottom: 6rem !important;
-  /* Double the default bootstrap pt-5 (which is 3rem) */
-}
-
-/* Typography & Separators */
+/* Common Typography & Separators */
 .section-title {
   color: #f4b8d0;
   font-size: 2.8rem;
@@ -55,64 +47,7 @@
   color: #c9a0b4 !important;
 }
 
-.card-separator {
-  width: 30px;
-  height: 3px;
-  background-color: #e8427a;
-}
-
-.card-separator-sm {
-  width: 25px;
-  height: 2px;
-  background-color: #e8427a;
-}
-
-/* Value Cards (About Us) */
-.value-card {
-  background-color: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.value-icon {
-
-  color: #e8427a;
-  font-size: 3rem;
-}
-
-.value-title {
-  color: #fce8f0;
-  font-size: 1.2rem;
-}
-
-.value-text {
-  font-size: 1rem;
-  color: #e5ccd8;
-  line-height: 1.8;
-}
-
-/* Original Light Cards */
-.value-card-light {
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-
-}
-
-.value-card-light:hover {
-  transform: translateY(-5px);
-}
-
-.card-separator-light {
-  width: 40px;
-  height: 2px;
-  background-color: #f4b8d0;
-}
-
-/* Buttons */
+/* Common Buttons */
 .btn-pink {
   background-color: transparent;
   color: #fce8f0;

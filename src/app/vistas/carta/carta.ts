@@ -1,6 +1,6 @@
-import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject, PLATFORM_ID, ChangeDetectorRef } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { Subscription } from 'rxjs';
+import { Subscription, timeout } from 'rxjs';
 import { ApiService, IProducto } from '../../services/api.service';
 import { CarritoService } from '../../services/carrito.service';
 
@@ -36,6 +36,7 @@ export class Carta implements OnInit, OnDestroy {
     constructor(
         private apiService: ApiService,
         private carritoService: CarritoService,
+        private cdr: ChangeDetectorRef,
         @Inject(PLATFORM_ID) private platformId: Object
     ) { }
 
@@ -52,15 +53,27 @@ export class Carta implements OnInit, OnDestroy {
         this.cargando = true;
         this.error = '';
 
-        const filtros: { categoria?: string; disponible?: boolean } =
+        const filtros: any =
             this.categoriaActiva !== 'todas'
-                ? { categoria: this.categoriaActiva, disponible: true }
-                : { disponible: true };
+                ? { categoria: this.categoriaActiva, disponible: true, noCache: true }
+                : { disponible: true, noCache: true };
 
-        this.sub = this.apiService.getProductos(filtros).subscribe({
-            next: (p) => { this.productos = p; this.cargando = false; },
-            error: () => { this.error = 'No se pudo cargar la carta.'; this.cargando = false; }
-        });
+        // Añadimos un timeout y forzamos change detection para evitar bloqueos
+        this.sub = this.apiService.getProductos(filtros)
+            .pipe(timeout(10000))
+            .subscribe({
+                next: (p) => {
+                    this.productos = p;
+                    this.cargando = false;
+                    this.cdr.detectChanges();
+                },
+                error: (err) => {
+                    console.error('Error al cargar productos:', err);
+                    this.error = 'No se pudo cargar la carta. Revisa tu conexión o inténtalo de nuevo.';
+                    this.cargando = false;
+                    this.cdr.detectChanges();
+                }
+            });
     }
 
     filtrarPor(cat: string): void {

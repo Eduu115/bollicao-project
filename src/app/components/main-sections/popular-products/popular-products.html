@@ -1,0 +1,51 @@
+<section id="productos" class="categories-section py-5 text-center">
+    <div class="container-fluid py-4">
+        <h2 class="section-title fw-bold mb-1">Nuestros productos más populares</h2>
+        <div class="title-separator mx-auto my-4"></div>
+
+        <!-- Carrusel horizontal infinito -->
+        <div class="carrusel-wrapper">
+            <div class="carrusel-overflow">
+                <div class="carrusel-track" id="carrusel-track">
+                    @if (productosPopulares.length === 0) {
+                    <div class="carrusel-empty text-muted">Cargando productos...</div>
+                    }
+
+                    @for (p of productosPopulares; track p._id) {
+                    <div class="producto-card">
+                        <div class="producto-img-wrap">
+                            <img [src]="p.imagen || '/img/placeholder.png'" [alt]="p.nombre" class="producto-img"
+                                loading="lazy">
+                        </div>
+                        <div class="producto-info">
+                            <h6 class="producto-nombre">{{ p.nombre }}</h6>
+                            <span class="producto-precio">{{ p.precio | number:'1.2-2' }} €</span>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Duplicamos los elementos para el bucle infinito -->
+                    @for (p of productosPopulares; track p._id + '-dup') {
+                    <div class="producto-card" aria-hidden="true">
+                        <div class="producto-img-wrap">
+                            <img [src]="p.imagen || '/img/placeholder.png'" [alt]="p.nombre" class="producto-img"
+                                loading="lazy">
+                        </div>
+                        <div class="producto-info">
+                            <h6 class="producto-nombre">{{ p.nombre }}</h6>
+                            <span class="producto-precio">{{ p.precio | number:'1.2-2' }} €</span>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4 pt-3 text-center">
+            <a routerLink="/carta" class="btn btn-pink px-4 py-2 fw-bold text-decoration-none"
+                style="font-size: 1.1rem; border-radius: 50px;">
+                Ver todos <i class="fa-solid fa-arrow-right ms-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
