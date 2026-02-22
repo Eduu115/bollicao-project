@@ -1,0 +1,56 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" #cartOffcanvas id="cartOffcanvas"
+    aria-labelledby="cartOffcanvasLabel">
+
+    <!-- Header del offcanvas -->
+    <div class="offcanvas-header cart-header">
+        <div class="cart-header-content">
+            <div class="avatar-circle cart-icon-circle">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+            <div class="profile-info">
+                <h5 class="offcanvas-title mb-0" id="cartOffcanvasLabel">Mi Carrito</h5>
+                <small class="profile-email">{{ getTotalItems() }} artículos</small>
+            </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Cerrar"></button>
+    </div>
+
+    <!-- Cuerpo del offcanvas -->
+    <div class="offcanvas-body p-0 d-flex flex-column">
+
+        <!-- Lista de Productos -->
+        <div class="cart-items-container flex-grow-1 overflow-auto">
+            @if (cartItems.length > 0) {
+            @for (item of cartItems; track item.id) {
+            <div class="cart-item">
+                <div class="cart-item-details">
+                    <h6 class="cart-item-title">{{ item.nombre }}</h6>
+                    <span class="cart-item-price">{{ item.precio | number:'1.2-2' }} €</span>
+                </div>
+                <div class="cart-item-status">
+                    <i class="fa-solid fa-check text-success"></i>
+                </div>
+            </div>
+            }
+            } @else {
+            <div class="empty-cart-message">
+                <i class="fa-solid fa-basket-shopping mb-3 empty-icon"></i>
+                <p>Tu carrito está vacío</p>
+            </div>
+            }
+        </div>
+
+        <!-- Footer / Checkout Button -->
+        <div class="cart-footer">
+            <div class="cart-total d-flex justify-content-between mb-3">
+                <span class="fw-semibold text-light">Total:</span>
+                <span class="fw-bold fs-5 total-price">{{ getTotalPrice() | number:'1.2-2' }} €</span>
+            </div>
+            <button class="btn w-100 btn-tramitar-pedido" (click)="checkout()">
+                TRAMITAR PEDIDO
+            </button>
+        </div>
+
+    </div>
+</div>

@@ -4,6 +4,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { AuthModalService } from '../../services/auth-modal.service';
 import { SessionService } from '../../services/session.service';
 import { ProfileOffcanvasService } from '../../services/profile-offcanvas.service';
+import { CartOffcanvasService } from '../../services/cart-offcanvas.service';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,7 @@ export class Header {
     private authModalService: AuthModalService,
     private sessionService: SessionService,
     private profileOffcanvasService: ProfileOffcanvasService,
+    private cartOffcanvasService: CartOffcanvasService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
@@ -27,6 +29,11 @@ export class Header {
     if (isPlatformBrowser(this.platformId)) {
       this.scrolled = window.scrollY > (window.innerHeight - 86);
     }
+  }
+
+  onCartClick(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+      this.cartOffcanvasService.open();
   }
 
   /** Abre offcanvas si hay sesión activa, o modal de login si no */

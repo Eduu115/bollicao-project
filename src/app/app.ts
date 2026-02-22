@@ -6,10 +6,11 @@ import { Header } from './components/header/header';
 import { LoginModal } from './components/modals/login-modal/login-modal';
 import { RegisterModal } from './components/modals/register-modal/register-modal';
 import { ProfileOffcanvas } from './components/modals/profile-offcanvas/profile-offcanvas';
+import { CartOffcanvas } from './components/modals/cart-offcanvas/cart-offcanvas';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Footer, Header, LoginModal, RegisterModal, ProfileOffcanvas],
+  imports: [RouterOutlet, Footer, Header, LoginModal, RegisterModal, ProfileOffcanvas, CartOffcanvas],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

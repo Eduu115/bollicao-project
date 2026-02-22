@@ -1,0 +1,260 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background-color: var(--bg-base);
+    /* Match global dark theme */
+    color: var(--text-light);
+    font-family: 'Oxanium', sans-serif;
+}
+
+/* === Utility Wrappers === */
+.checkout-container {
+    padding-top: 150px !important;
+    /* spacing below fixed navbar */
+    padding-bottom: 80px;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.text-rosa {
+    color: var(--rosa-fuerte) !important;
+}
+
+.border-rosa-pastel {
+    border-color: var(--border-rosa) !important;
+}
+
+/* === Breadcrumb / Stepper === */
+.checkout-breadcrumb {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.step-link {
+    transition: color 0.3s ease;
+    padding-bottom: 5px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.step-link.disabled {
+    cursor: default;
+    pointer-events: none;
+}
+
+.step-link.active {
+    color: var(--rosa-fuerte);
+    font-weight: 600;
+    position: relative;
+}
+
+.step-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--rosa-fuerte);
+}
+
+.step-link.completed {
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.step-chevron {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* === Section Titles & Text === */
+.section-title {
+    color: var(--text-light);
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+}
+
+.small-notice {
+    font-size: 0.9rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-rosa);
+}
+
+/* === Options Cards === */
+.shipping-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.shipping-card {
+    padding: 1.25rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+}
+
+.shipping-card:hover {
+    background-color: rgba(232, 66, 122, 0.03);
+}
+
+.shipping-card.active {
+    background-color: rgba(232, 66, 122, 0.08);
+    /* Pink highlight */
+    border: 1px solid var(--rosa-fuerte);
+    box-shadow: 0 0 10px rgba(232, 66, 122, 0.1);
+}
+
+.method-title {
+    font-size: 1.05rem;
+    color: var(--text-light);
+}
+
+.method-desc {
+    font-size: 0.85rem;
+    display: block;
+    margin-top: 0.1rem;
+}
+
+.method-price {
+    font-size: 0.95rem;
+}
+
+.text-success {
+    color: #10b981 !important;
+    /* Use a vibrant green that pops on dark bg */
+}
+
+/* === Buttons === */
+.btn-continuar,
+.btn-comprar {
+    background-color: var(--rosa-fuerte);
+    color: white;
+    font-weight: 700;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-continuar:hover:not(:disabled),
+.btn-comprar:hover:not(:disabled) {
+    background-color: var(--rosa-oscuro);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(232, 66, 122, 0.3);
+}
+
+.btn-continuar:disabled {
+    background-color: var(--bg-card);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    border: 1px solid var(--border-pastel);
+}
+
+.btn-voler {
+    background-color: transparent;
+    color: var(--text-light);
+    border: 1px solid var(--border-pastel);
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-voler:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+
+/* === Right Column (Summary) === */
+.checkout-right {
+    /* Optional left border on desktop to match screenshot aesthetic roughly */
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.summary-box {
+    padding: 1rem 0;
+}
+
+@media (min-width: 992px) {
+    .summary-box {
+        padding: 0 1rem 0 2rem;
+    }
+}
+
+.item-img-container {
+    width: 70px;
+    height: 85px;
+    background: var(--bg-card);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.item-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-light);
+}
+
+.price-current {
+    color: var(--rosa-fuerte) !important;
+    /* replace red with brand pink */
+}
+
+.summary-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+}
+
+.total-final {
+    color: var(--text-light);
+}
+
+/* === Summary Form (Step 3) === */
+.summary-box-standalone {
+    background-color: var(--bg-card);
+}
+
+/* === Animations === */
+.fade-in {
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === Form Controls (Accordion) === */
+.form-control {
+    background-color: var(--bg-base) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-light) !important;
+}
+
+.form-control:focus {
+    border-color: var(--rosa-fuerte) !important;
+    box-shadow: 0 0 0 0.25rem rgba(232, 66, 122, 0.25) !important;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
