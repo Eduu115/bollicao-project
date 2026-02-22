@@ -1,0 +1,55 @@
+<div class="offcanvas offcanvas-end" tabindex="-1" #profileOffcanvas id="profileOffcanvas"
+    aria-labelledby="profileOffcanvasLabel">
+
+    <!-- Header del offcanvas -->
+    <div class="offcanvas-header profile-header">
+        <div class="profile-header-content">
+            <div class="avatar-circle">{{ userInitial }}</div>
+            <div class="profile-info">
+                <h5 class="offcanvas-title mb-0" id="profileOffcanvasLabel">{{ userName }}</h5>
+                <small class="profile-email">{{ userEmail }}</small>
+            </div>
+        </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+            aria-label="Cerrar"></button>
+    </div>
+
+    <!-- Cuerpo del offcanvas -->
+    <div class="offcanvas-body p-0">
+
+        <nav class="profile-nav">
+            <a class="profile-nav-item" routerLink="/perfil" (click)="close()">
+                <span class="profile-nav-icon"><i class="fa-solid fa-user"></i></span>
+                <span>Mi perfil</span>
+                <i class="fa-solid fa-chevron-right ms-auto"></i>
+            </a>
+
+            <a class="profile-nav-item" routerLink="/pedidos" (click)="close()">
+                <span class="profile-nav-icon"><i class="fa-solid fa-bag-shopping"></i></span>
+                <span>Mis pedidos</span>
+                <i class="fa-solid fa-chevron-right ms-auto"></i>
+            </a>
+
+            <a class="profile-nav-item" routerLink="/puntos" (click)="close()">
+                <span class="profile-nav-icon"><i class="fa-solid fa-star"></i></span>
+                <span>Mis puntos</span>
+                <i class="fa-solid fa-chevron-right ms-auto"></i>
+            </a>
+
+            <a class="profile-nav-item" routerLink="/configuracion" (click)="close()">
+                <span class="profile-nav-icon"><i class="fa-solid fa-gear"></i></span>
+                <span>Configuración</span>
+                <i class="fa-solid fa-chevron-right ms-auto"></i>
+            </a>
+        </nav>
+
+        <div class="profile-divider"></div>
+
+        <!-- Logout -->
+        <button class="profile-logout-btn w-100" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket me-2"></i>
+            Cerrar sesión
+        </button>
+
+    </div>
+</div>

@@ -12,13 +12,6 @@
         <li class="nav-item">
           <a class="nav-link fw-semibold" routerLink="/">Inicio</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Servicios</a>
-          <ul class="dropdown-menu border-0 shadow rounded-4">
-            <li><a class="dropdown-item" routerLink="/domicilio">Comida a domicilio</a></li>
-            <li><a class="dropdown-item" routerLink="/pasteles">Pasteles específico</a></li>
-          </ul>
-        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/nosotros">Nosotros</a>
         </li>
@@ -26,14 +19,14 @@
           <a class="nav-link" routerLink="/contacto">Contáctanos</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" (click)="openRegisterModal()" style="cursor: pointer;"> Suscribirse </a>
+          <a class="nav-link" routerLink="/carta">Carta</a>
         </li>
       </ul>
     </div>
 
     <!-- Iconos a la derecha -->
     <div class="header-icons">
-      <div class="carrito-circle" routerLink="/perfil">
+      <div class="carrito-circle" (click)="onProfileClick()" style="cursor: pointer;">
         <i class="fa-solid fa-user"></i>
       </div>
       <div class="carrito-circle">
