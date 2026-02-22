@@ -1,26 +1,19 @@
-import { Component, OnInit, AfterViewInit, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 import { UsersService } from '../../../services/users.service';
 import { PuntosService } from '../../../services/puntos.service';
 import { AuthModalService } from '../../../services/auth-modal.service';
 
 declare var bootstrap: any;
 
-// Asegurar acceso a bootstrap desde window
 function getBootstrap(): any {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-  // Bootstrap puede estar en window.bootstrap o como variable global
-  if ((window as any).bootstrap) {
-    return (window as any).bootstrap;
-  }
-  if (typeof bootstrap !== 'undefined') {
-    return bootstrap;
-  }
+  if (typeof window === 'undefined') return null;
+  if ((window as any)['bootstrap']) return (window as any)['bootstrap'];
+  if (typeof bootstrap !== 'undefined') return bootstrap;
   return null;
 }
 
@@ -31,12 +24,15 @@ function getBootstrap(): any {
   templateUrl: './register-modal.html',
   styleUrl: './register-modal.css'
 })
-export class RegisterModal implements OnInit, AfterViewInit {
+export class RegisterModal implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('registerModal') modalElement!: ElementRef;
-  private modalInstance: any;
+  private modalInstance: any = null;
 
   form!: FormGroup;
   errorMessage = '';
+
+  // Gestión de suscripciones para evitar leaks
+  private subs = new Subscription();
 
   constructor(
     private router: Router,
@@ -57,19 +53,30 @@ export class RegisterModal implements OnInit, AfterViewInit {
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
 
-    // Suscribirse a los cambios del servicio
-    this.authModalService.registerModal$.subscribe(open => {
-      if (open) {
-        // Esperar a que el ViewChild esté disponible
-        setTimeout(() => this.openModal(), 100);
-      } else {
-        this.closeModal();
-      }
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      this.subs.add(
+        this.authModalService.registerModal$.subscribe((open: boolean) => {
+          if (open) {
+            setTimeout(() => this.openModal(), 50);
+          } else {
+            this.closeModal();
+          }
+        })
+      );
+    }
   }
 
   ngAfterViewInit(): void {
-    // No se instancia aquí; se usa getOrCreateInstance en openModal.
+    if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
+
+    // Sincroniza el servicio cuando el usuario cierra con botón X de Bootstrap
+    this.modalElement.nativeElement.addEventListener('hidden.bs.modal', () => {
+      this.authModalService.closeRegisterModal();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 
   openModal(): void {
@@ -125,12 +132,11 @@ export class RegisterModal implements OnInit, AfterViewInit {
     this.usersService.setCurrentSession(user);
     this.puntosService.setUsuarioActual(user.email, this.nombreDesdeEmail(user.email));
 
-    this.closeModal();
+    this.authModalService.closeRegisterModal();
     this.router.navigateByUrl('/perfil');
   }
 
   switchToLogin(): void {
-    this.closeModal();
     this.authModalService.switchToLogin();
   }
 
