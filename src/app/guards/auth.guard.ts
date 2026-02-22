@@ -10,6 +10,5 @@ export const authGuard: CanActivateFn = () => {
         return true;
     }
 
-    // No autenticado → redirige a página de acceso denegado
     return router.createUrlTree(['/unauthorized']);
 };

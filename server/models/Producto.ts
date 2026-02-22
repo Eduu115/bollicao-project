@@ -1,18 +1,18 @@
 import { Schema, model, Document } from 'mongoose';
 
-// ─── Interfaz TypeScript ───────────────────────────────────────────────────
+
 export interface IProducto extends Document {
     nombre: string;
     descripcion: string;
-    precio: number;              // precio unitario en €
-    categoria: string;           // ej: 'tarta', 'bollo', 'pastel', 'bebida'
-    imagen?: string;             // URL de la imagen
+    precio: number;              
+    categoria: string;           
+    imagen?: string;             
     disponible: boolean;
     stock: number;
     creadoEn: Date;
 }
 
-// ─── Schema ────────────────────────────────────────────────────────────────
+
 const ProductoSchema = new Schema<IProducto>(
     {
         nombre: {

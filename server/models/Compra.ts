@@ -1,12 +1,10 @@
 import { Schema, model, Document, Types } from 'mongoose';
 
-// ─── Sub-schema: línea de producto dentro de una compra ────────────────────
-// Una compra puede incluir varios productos (carrito)
 export interface ILineaCompra {
-    producto: Types.ObjectId;    // ref → Producto
+    producto: Types.ObjectId;
     cantidad: number;
-    precioUnitario: number;      // precio en el momento de la compra (snapshot)
-    subtotal: number;            // cantidad × precioUnitario
+    precioUnitario: number;
+    subtotal: number;
 }
 
 const LineaCompraSchema = new Schema<ILineaCompra>(
@@ -32,21 +30,19 @@ const LineaCompraSchema = new Schema<ILineaCompra>(
             min: 0,
         },
     },
-    { _id: false } // no necesita _id propio, es un subdocumento
+    { _id: false }
 );
 
-// ─── Interfaz principal ────────────────────────────────────────────────────
 export interface ICompra extends Document {
-    cliente: Types.ObjectId;     // ref → Cliente
-    lineas: ILineaCompra[];      // productos comprados
-    total: number;               // suma de todos los subtotales
-    puntosGenerados: number;     // 1 punto por cada 10 € (regla de negocio)
+    cliente: Types.ObjectId;
+    lineas: ILineaCompra[];
+    total: number;
+    puntosGenerados: number;
     estado: 'pendiente' | 'confirmado' | 'enviado' | 'entregado' | 'cancelado';
-    descripcion?: string;        // resumen libre, ej: "Tarta personalizada"
+    descripcion?: string;
     fechaCompra: Date;
 }
 
-// ─── Schema principal ──────────────────────────────────────────────────────
 const CompraSchema = new Schema<ICompra>(
     {
         cliente: {
@@ -92,11 +88,8 @@ const CompraSchema = new Schema<ICompra>(
     }
 );
 
-// ─── Hook: calcular puntos y actualizar totales del cliente ────────────────
-// Se ejecuta automáticamente al guardar una compra nueva
 CompraSchema.pre('save', async function () {
     if (this.isNew) {
-        // Regla de negocio: 1 punto por cada 10 € gastados
         this.puntosGenerados = Math.floor(this.total / 10);
     }
 });

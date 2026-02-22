@@ -4,7 +4,6 @@ import { Compra } from '../models/Compra';
 
 const productoController = {
 
-    // GET /api/productos
     getAllProductos: async (req: Request, res: Response) => {
         try {
             const { categoria, disponible } = req.query;
@@ -18,7 +17,6 @@ const productoController = {
         }
     },
 
-    // GET /api/productos/:id
     getProductoById: async (req: Request, res: Response) => {
         try {
             const producto = await Producto.findById(req.params.id);
@@ -31,9 +29,6 @@ const productoController = {
         }
     },
 
-    // GET /api/productos/:id/compras  ← POPULATE
-    // Devuelve el producto junto con todas las compras en las que aparece,
-    // y dentro de cada compra popula los datos del cliente
     getProductoConCompras: async (req: Request, res: Response) => {
         try {
             const producto = await Producto.findById(req.params.id);
@@ -42,7 +37,7 @@ const productoController = {
             }
 
             const compras = await Compra.find({ 'lineas.producto': req.params.id })
-                .populate('cliente', 'nombre email telefono') // populate cliente
+                .populate('cliente', 'nombre email telefono') 
                 .select('cliente total estado fechaCompra lineas')
                 .sort({ fechaCompra: -1 });
 
@@ -52,7 +47,6 @@ const productoController = {
         }
     },
 
-    // POST /api/productos
     createProducto: async (req: Request, res: Response) => {
         try {
             const nuevoProducto = new Producto(req.body);
@@ -63,7 +57,6 @@ const productoController = {
         }
     },
 
-    // PUT /api/productos/:id
     updateProducto: async (req: Request, res: Response) => {
         try {
             const productoActualizado = await Producto.findByIdAndUpdate(
@@ -80,7 +73,6 @@ const productoController = {
         }
     },
 
-    // DELETE /api/productos/:id  (baja lógica)
     deleteProducto: async (req: Request, res: Response) => {
         try {
             const producto = await Producto.findByIdAndUpdate(

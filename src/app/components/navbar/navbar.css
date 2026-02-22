@@ -1,11 +1,9 @@
-/* 🌹 Navbar oscuro — se fusiona visualmente con el header flotante */
+
 .navbar-pasteleria {
   background: linear-gradient(90deg, #2d1520, #3d1e2c);
   border-bottom: 1px solid rgba(232, 66, 122, 0.3);
   position: relative;
   z-index: 10;
-  /* El header flotante ocupa: top(16px) + height(70px) = 86px desde arriba.
-     El navbar sube ese mismo valor para quedar justo debajo del header. */
   margin-top: -86px;
   height: 86px;
   display: flex;
@@ -20,7 +18,7 @@
   justify-content: center;
 }
 
-/* 🌸 Links */
+
 .navbar-pasteleria .nav-link {
   color: #f4b8d0 !important;
   transition: all 0.3s ease;
@@ -31,7 +29,7 @@
   transform: translateY(-2px);
 }
 
-/* Rosa fuerte activo */
+
 .navbar-pasteleria .nav-link.active {
   color: #e8427a !important;
 }

@@ -1,19 +1,19 @@
 import { Schema, model, Document } from 'mongoose';
 
-// ─── Interfaz TypeScript ───────────────────────────────────────────────────
+
 export interface ICliente extends Document {
     nombre: string;
     email: string;
     passwordHash: string;
     telefono?: string;
     direccion?: string;
-    puntosTotales: number;       // calculado a partir de las compras
-    totalGastado: number;        // suma acumulada de todas sus compras
+    puntosTotales: number;       
+    totalGastado: number;        
     activo: boolean;
     creadoEn: Date;
 }
 
-// ─── Schema ────────────────────────────────────────────────────────────────
+
 const ClienteSchema = new Schema<ICliente>(
     {
         nombre: {

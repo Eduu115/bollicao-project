@@ -1,9 +1,4 @@
-/**
- * ─── SEED ────────────────────────────────────────────────────────────────────
- * Uso:  npx ts-node --project tsconfig.json db/seed.ts
- *   o:  npm run seed
- * ─────────────────────────────────────────────────────────────────────────────
- */
+
 
 import mongoose from 'mongoose';
 import { Cliente } from '../models/Cliente';
@@ -12,7 +7,7 @@ import { Compra } from '../models/Compra';
 
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/bollicao';
 
-// ─── Clientes ─────────────────────────────────────────────────────────────────
+
 
 const clientesData = [
     { nombre: 'Ana García', email: 'ana.garcia@email.com', passwordHash: 'pass1234', telefono: '612345678', direccion: 'Calle Mayor 12, Madrid' },
@@ -21,11 +16,10 @@ const clientesData = [
     { nombre: 'Pedro Martínez', email: 'pedro.martinez@email.com', passwordHash: 'pass1234', telefono: '645678901', direccion: 'Calle Libertad 8, Valencia' },
 ];
 
-// ─── Productos ────────────────────────────────────────────────────────────────
-// Fotos: Unsplash (libres de uso)
+
+
 
 const productosData = [
-    // ── TARTAS ──
     {
         nombre: 'Tarta de Chocolate',
         descripcion: 'Tarta artesanal de chocolate negro con ganache y frutos rojos',
@@ -56,7 +50,6 @@ const productosData = [
         precio: 30.00, categoria: 'tarta', stock: 5, disponible: true,
         imagen: 'https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7?w=400&h=300&fit=crop',
     },
-    // ── BOLLOS ──
     {
         nombre: 'Croissant de Mantequilla',
         descripcion: 'Croissant hojaldrado con mantequilla francesa, recién horneado',
@@ -81,7 +74,6 @@ const productosData = [
         precio: 2.80, categoria: 'bollo', stock: 22, disponible: true,
         imagen: 'https://images.unsplash.com/photo-1586985289688-ca3cf47d3e6e?w=400&h=300&fit=crop',
     },
-    // ── PASTELES ──
     {
         nombre: 'Pastel de Limón',
         descripcion: 'Pastel suave con crema de limón y merengue tostado',
@@ -100,7 +92,6 @@ const productosData = [
         precio: 20.00, categoria: 'pastel', stock: 4, disponible: true,
         imagen: 'https://images.unsplash.com/photo-1519869325930-281384150729?w=400&h=300&fit=crop',
     },
-    // ── GALLETAS ──
     {
         nombre: 'Galletas de Avena y Chocolate',
         descripcion: 'Pack de 12 galletas artesanales con pepitas de chocolate',
@@ -119,7 +110,6 @@ const productosData = [
         precio: 12.00, categoria: 'galleta', stock: 15, disponible: true,
         imagen: 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=400&h=300&fit=crop',
     },
-    // ── EXTRAS ──
     {
         nombre: 'Tarta de Cumpleanos',
         descripcion: 'Bizcocho de vainilla con buttercream de fresa, decorada a mano para celebraciones',
@@ -151,7 +141,6 @@ const productosData = [
         imagen: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400&h=300&fit=crop',
     },
 
-    // ── BEBIDAS ──
     {
         nombre: 'Café con Leche',
         descripcion: 'Café de especialidad con leche entera vaporizada',
@@ -178,14 +167,13 @@ const productosData = [
     },
 ];
 
-// ─── Seed ─────────────────────────────────────────────────────────────────────
+
 
 async function seed() {
     try {
         await mongoose.connect(MONGO_URI);
         console.log(`Conectado a MongoDB: ${MONGO_URI}`);
 
-        // Limpiar colecciones
         await Promise.all([
             Cliente.deleteMany({}),
             Producto.deleteMany({}),
@@ -193,13 +181,11 @@ async function seed() {
         ]);
         console.log('Colecciones limpiadas');
 
-        // Insertar datos
         const clientes = await Cliente.insertMany(clientesData);
         const productos = await Producto.insertMany(productosData);
         console.log(`${clientes.length} clientes insertados`);
         console.log(`${productos.length} productos insertados`);
 
-        // Compras de ejemplo
         const comprasData = [
             {
                 cliente: clientes[0]._id,

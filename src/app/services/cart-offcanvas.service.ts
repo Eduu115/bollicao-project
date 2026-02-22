@@ -7,7 +7,6 @@ import { Subject } from 'rxjs';
 export class CartOffcanvasService {
     private offcanvasOpenSubject = new Subject<boolean>();
 
-    // Observable for components to subscribe to
     offcanvasOpen$ = this.offcanvasOpenSubject.asObservable();
 
     constructor() { }
@@ -21,6 +20,5 @@ export class CartOffcanvasService {
     }
 
     toggle() {
-        // This requires keeping track of state, but simpler for now to explicitly open/close
     }
 }

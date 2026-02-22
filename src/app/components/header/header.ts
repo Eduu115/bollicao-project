@@ -36,7 +36,6 @@ export class Header {
       this.cartOffcanvasService.open();
   }
 
-  /** Abre offcanvas si hay sesión activa, o modal de login si no */
   onProfileClick(): void {
     if (!isPlatformBrowser(this.platformId)) return;
     if (this.sessionService.isLoggedIn()) {

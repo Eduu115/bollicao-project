@@ -4,7 +4,6 @@ import { Compra } from '../models/Compra';
 
 const clienteController = {
 
-    // GET /api/clientes
     getAllClientes: async (req: Request, res: Response) => {
         try {
             const clientes = await Cliente.find({ activo: true }).select('-passwordHash');
@@ -14,7 +13,6 @@ const clienteController = {
         }
     },
 
-    // GET /api/clientes/:id
     getClienteById: async (req: Request, res: Response) => {
         try {
             const cliente = await Cliente.findById(req.params.id).select('-passwordHash');
@@ -27,9 +25,7 @@ const clienteController = {
         }
     },
 
-    // GET /api/clientes/:id/compras  ← POPULATE
-    // Devuelve el cliente junto con todas sus compras,
-    // y dentro de cada compra popula los datos completos de cada producto
+
     getClienteConCompras: async (req: Request, res: Response) => {
         try {
             const cliente = await Cliente.findById(req.params.id).select('-passwordHash');
@@ -38,7 +34,7 @@ const clienteController = {
             }
 
             const compras = await Compra.find({ cliente: req.params.id })
-                .populate('lineas.producto', 'nombre precio categoria imagen') // populate productos
+                .populate('lineas.producto', 'nombre precio categoria imagen')
                 .sort({ fechaCompra: -1 });
 
             res.json({ cliente, compras });
@@ -47,7 +43,6 @@ const clienteController = {
         }
     },
 
-    // POST /api/clientes
     createCliente: async (req: Request, res: Response) => {
         try {
             const { nombre, email, passwordHash, telefono, direccion } = req.body;
@@ -63,7 +58,6 @@ const clienteController = {
         }
     },
 
-    // PUT /api/clientes/:id
     updateCliente: async (req: Request, res: Response) => {
         try {
             const { passwordHash, ...datosActualizables } = req.body;
@@ -81,7 +75,6 @@ const clienteController = {
         }
     },
 
-    // DELETE /api/clientes/:id  (baja lógica)
     deleteCliente: async (req: Request, res: Response) => {
         try {
             const cliente = await Cliente.findByIdAndUpdate(
@@ -98,8 +91,6 @@ const clienteController = {
         }
     },
 
-    // POST /api/clientes/login
-    // Body: { email, password }
     login: async (req: Request, res: Response) => {
         try {
             const { email, password } = req.body;
@@ -123,8 +114,6 @@ const clienteController = {
         }
     },
 
-    // POST /api/clientes/register
-    // Body: { nombre, email, password }
     register: async (req: Request, res: Response) => {
         try {
             const { nombre, email, password, telefono, direccion } = req.body;

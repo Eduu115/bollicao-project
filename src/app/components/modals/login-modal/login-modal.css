@@ -42,7 +42,7 @@
   overflow: hidden;
 }
 
-/* Header / botón cerrar */
+
 #loginModal .modal-header .btn-close {
   opacity: 0.9;
   filter: invert(1) grayscale(100%);

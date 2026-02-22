@@ -1,22 +1,17 @@
-/* =============================================
-   HEADER FLOTANTE → FULL WIDTH al hacer scroll
-   ============================================= */
 
-/* Estado inicial: flotante, 80%, border-radius */
+
+
 .header-blur {
-  /* Posición */
   position: fixed;
   top: 16px;
   left: 0;
   right: 0;
-  /* Centrado sin transform: margen automático a ambos lados */
   width: 80%;
   margin-inline: auto;
   border-radius: 20px;
   z-index: 1000;
   height: 70px;
 
-  /* Estilo visual: casi transparente con blur oscuro */
   background: rgba(10, 4, 8, 0.15);
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
@@ -25,7 +20,6 @@
     0 8px 32px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(244, 184, 208, 0.06);
 
-  /* Transición suave — solo propiedades interpolables */
   transition:
     top 0.5s cubic-bezier(0.4, 0, 0.2, 1),
     width 0.5s cubic-bezier(0.4, 0, 0.2, 1),
@@ -35,7 +29,7 @@
     border-color 0.5s ease;
 }
 
-/* Estado scrolled: full width, pegado arriba, más sólido */
+
 .header-blur.scrolled {
   top: 0;
   width: 100%;
@@ -52,7 +46,7 @@
     0 1px 0 rgba(232, 66, 122, 0.2);
 }
 
-/* Contenedor interno */
+
 .header-blur .container {
   height: 100%;
   display: flex;
@@ -61,7 +55,7 @@
   flex-wrap: nowrap;
 }
 
-/* Logo */
+
 .header-blur .navbar-brand {
   color: #f4b8d0 !important;
   text-decoration: none;
@@ -73,14 +67,14 @@
   opacity: 0.85;
 }
 
-/* Contenedor de iconos (perfil + carrito) */
+
 .header-icons {
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
 
-/* Carrito y perfil */
+
 .carrito-circle {
   width: 44px;
   height: 44px;
@@ -107,9 +101,7 @@
   font-size: 1.1rem;
 }
 
-/* =============================================
-   NAV ITEMS (fusionado en header)
-   ============================================= */
+
 .nav-items-container {
   flex: 1;
   display: flex !important;
@@ -171,7 +163,7 @@ header .nav-items-container .nav-link {
   color: #e8427a !important;
 }
 
-/* Dropdown */
+
 .nav-items-container .dropdown-menu {
   background: rgba(45, 21, 32, 0.97);
   backdrop-filter: blur(12px);
@@ -188,11 +180,8 @@ header .nav-items-container .nav-link {
   color: #e8427a;
 }
 
-/* =============================================
-   NAV LINKS EN EL HEADER (aparecen al fusionarse)
-   ============================================= */
+
 .header-nav-links {
-  /* Oculto por defecto: sin ancho, sin opacidad */
   flex: 1;
   display: flex;
   justify-content: center;
@@ -201,20 +190,19 @@ header .nav-items-container .nav-link {
   max-width: 0;
   opacity: 0;
   pointer-events: none;
-  /* Transición: primero se expande el header (0.5s), luego aparecen los links */
   transition:
     max-width 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.15s,
     opacity 0.35s ease 0.3s;
 }
 
-/* Al hacer scroll: los links aparecen */
+
 .header-blur.scrolled .header-nav-links {
   max-width: 700px;
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Estilos de los links dentro del header */
+
 .header-nav-links .navbar-nav {
   display: flex !important;
   flex-direction: row !important;
@@ -265,9 +253,7 @@ header .nav-items-container .nav-link {
   color: #e8427a;
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
+
 @media (max-width: 768px) {
   .header-blur {
     width: 92%;
