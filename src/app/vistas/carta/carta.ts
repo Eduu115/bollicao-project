@@ -17,6 +17,9 @@ export class Carta implements OnInit, OnDestroy {
     categoriaActiva = 'todas';
     error = '';
     addedIds = new Set<string>();
+    showToast = false;
+    toastMessage = '';
+    private timeoutId: ReturnType<typeof setTimeout> | null = null;
 
     readonly categorias = [
         { id: 'todas', label: 'Todo' },
@@ -84,5 +87,20 @@ export class Carta implements OnInit, OnDestroy {
         this.carritoService.anyadir(producto, 1);
         this.addedIds.add(producto._id);
         setTimeout(() => this.addedIds.delete(producto._id), 1500);
+        this.mostrarToast(`${producto.nombre} añadido al carrito`);
+    }
+
+    mostrarToast(mensaje: string): void {
+        this.showToast = true;
+        this.toastMessage = mensaje;
+
+        if (this.timeoutId) {
+            clearTimeout(this.timeoutId);
+        }
+
+        this.timeoutId = setTimeout(() => {
+            this.showToast = false;
+            this.timeoutId = null;
+        }, 2000);
     }
 }
