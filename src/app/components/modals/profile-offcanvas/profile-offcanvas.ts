@@ -3,7 +3,7 @@ import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProfileOffcanvasService } from '../../../services/profile-offcanvas.service';
-import { UsersService } from '../../../services/users.service';
+import { SessionService, SessionUser } from '../../../services/session.service';
 
 declare var bootstrap: any;
 
@@ -19,11 +19,11 @@ export class ProfileOffcanvas implements OnInit, AfterViewInit, OnDestroy {
     private offcanvasInstance: any = null;
     private sub: Subscription = new Subscription();
 
-    userEmail: string = '';
+    session: SessionUser | null = null;
 
     constructor(
         private profileOffcanvasService: ProfileOffcanvasService,
-        private usersService: UsersService,
+        private sessionService: SessionService,
         private router: Router,
         @Inject(PLATFORM_ID) private platformId: Object
     ) { }
@@ -32,25 +32,20 @@ export class ProfileOffcanvas implements OnInit, AfterViewInit, OnDestroy {
         if (!isPlatformBrowser(this.platformId)) return;
 
         this.sub = this.profileOffcanvasService.offcanvasOpen$.subscribe((open: boolean) => {
-            const session = this.usersService.getCurrentSession();
-            this.userEmail = session?.email ?? '';
-            if (open) {
-                setTimeout(() => this.open(), 50);
-            } else {
-                this.close();
-            }
+            this.session = this.sessionService.getSession();
+            if (open) setTimeout(() => this.open(), 50);
+            else this.close();
         });
     }
 
     ngAfterViewInit(): void {
-        if (isPlatformBrowser(this.platformId) && this.offcanvasElement) {
-            const bs = this.getBootstrap();
-            if (bs) {
-                this.offcanvasInstance = new bs.Offcanvas(this.offcanvasElement.nativeElement);
-                this.offcanvasElement.nativeElement.addEventListener('hidden.bs.offcanvas', () => {
-                    this.profileOffcanvasService.close();
-                });
-            }
+        if (!isPlatformBrowser(this.platformId) || !this.offcanvasElement) return;
+        const bs = this.getBootstrap();
+        if (bs) {
+            this.offcanvasInstance = new bs.Offcanvas(this.offcanvasElement.nativeElement);
+            this.offcanvasElement.nativeElement.addEventListener('hidden.bs.offcanvas', () => {
+                this.profileOffcanvasService.close();
+            });
         }
     }
 
@@ -65,27 +60,25 @@ export class ProfileOffcanvas implements OnInit, AfterViewInit, OnDestroy {
                 this.offcanvasInstance = new bs.Offcanvas(this.offcanvasElement.nativeElement);
             }
         }
-        if (this.offcanvasInstance) {
-            this.offcanvasInstance.show();
-        }
+        this.offcanvasInstance?.show();
     }
 
     close(): void {
-        if (this.offcanvasInstance) {
-            this.offcanvasInstance.hide();
-        }
+        this.offcanvasInstance?.hide();
     }
 
     logout(): void {
-        this.usersService.clearSession();
+        this.sessionService.clearSession();
         this.profileOffcanvasService.close();
         this.router.navigateByUrl('/');
     }
 
     get userName(): string {
-        if (!this.userEmail) return 'Usuario';
-        const base = this.userEmail.split('@')[0] ?? 'Usuario';
-        return base.charAt(0).toUpperCase() + base.slice(1);
+        return this.session?.nombre ?? 'Usuario';
+    }
+
+    get userEmail(): string {
+        return this.session?.email ?? '';
     }
 
     get userInitial(): string {

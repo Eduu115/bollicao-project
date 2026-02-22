@@ -1,7 +1,7 @@
 <div class="perfil-page">
     <div class="container py-5">
 
-        <!-- Saldo / Puntos MMBRS -->
+        <!-- Saldo / Puntos -->
         <div class="saldo-bar mb-4">
             <div>
                 <span class="saldo-label">Puntos acumulados</span>
@@ -9,7 +9,7 @@
                 <span class="saldo-pendiente">1 punto por cada 10 € gastados</span>
             </div>
             <div class="saldo-meta">
-                <span class="saldo-gastado">Total gastado: {{ usuario.totalGastado.toFixed(2) }} €</span>
+                <span class="saldo-gastado">Total gastado: {{ totalGastado.toFixed(2) }} €</span>
             </div>
         </div>
 
@@ -19,9 +19,9 @@
             <div class="col-lg-3">
                 <div class="perfil-sidebar">
                     <div class="perfil-info mb-4">
-                        @if (usuario) {
-                        <h2 class="perfil-nombre">¡Hola, {{ usuario.nombre }}!</h2>
-                        <p class="perfil-email">{{ usuario.email }}</p>
+                        @if (session) {
+                        <h2 class="perfil-nombre">¡Hola, {{ nombreUsuario }}!</h2>
+                        <p class="perfil-email">{{ emailUsuario }}</p>
                         }
                     </div>
                     <nav class="perfil-nav">
@@ -43,17 +43,14 @@
                         <h3 class="perfil-section-title">Mis compras</h3>
                     </div>
 
-                    <!-- Botón de prueba (quitar en producción) -->
-                    <div class="mt-4 p-3 bg-light rounded border">
-                        <p class="small text-muted mb-2"><strong>Simular compra (solo para pruebas)</strong></p>
-                        <button class="btn btn-sm btn-primary" (click)="simularCompra('Tarta personalizada', 30)">
-                            Añadir pedido de 30 € (+3 pts)
-                        </button>
+                    @if (cargando) {
+                    <div class="text-center py-4">
+                        <span class="spinner-border" role="status"></span>
                     </div>
-
+                    } @else {
                     <div class="pedidos-list">
-                        @if (usuario && usuario.pedidos.length > 0) {
-                        @for (pedido of usuario.pedidos; track pedido.id) {
+                        @if (pedidos.length > 0) {
+                        @for (pedido of pedidos; track pedido.id) {
                         <div class="pedido-item">
                             <div class="pedido-icono">
                                 <i class="fa-solid fa-box-open"></i>
@@ -67,9 +64,6 @@
                                 <span class="pedido-total">{{ pedido.total }} €</span>
                                 <span class="pedido-puntos">+{{ pedido.puntos }} pts</span>
                             </div>
-                            <button class="btn-eliminar" (click)="eliminarPedido(pedido.id)" title="Eliminar pedido">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
                         </div>
                         }
                         } @else {
@@ -80,6 +74,7 @@
                         }
                     </div>
                     }
+                    }
 
                     <!-- TAB: Datos personales -->
                     @if (tabActiva === 'datos') {
@@ -87,19 +82,19 @@
                         <h3 class="perfil-section-title">Datos personales</h3>
                     </div>
 
-                    @if (usuario) {
+                    @if (session) {
                     <div class="datos-personales">
                         <div class="dato-item">
                             <span class="dato-label">Nombre</span>
-                            <span class="dato-valor">{{ usuario.nombre }}</span>
+                            <span class="dato-valor">{{ nombreUsuario }}</span>
                         </div>
                         <div class="dato-item">
                             <span class="dato-label">Email</span>
-                            <span class="dato-valor">{{ usuario.email }}</span>
+                            <span class="dato-valor">{{ emailUsuario }}</span>
                         </div>
                         <div class="dato-item">
                             <span class="dato-label">Total gastado</span>
-                            <span class="dato-valor">{{ usuario.totalGastado.toFixed(2) }} €</span>
+                            <span class="dato-valor">{{ totalGastado.toFixed(2) }} €</span>
                         </div>
                         <div class="dato-item">
                             <span class="dato-label">Puntos acumulados</span>
@@ -107,7 +102,7 @@
                         </div>
                         <div class="dato-item">
                             <span class="dato-label">Pedidos realizados</span>
-                            <span class="dato-valor">{{ usuario.pedidos.length }}</span>
+                            <span class="dato-valor">{{ pedidos.length }}</span>
                         </div>
                     </div>
                     }

@@ -1,11 +1,10 @@
 import { Component, OnInit, AfterViewInit, OnDestroy, Inject, PLATFORM_ID, ElementRef, ViewChild } from '@angular/core';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
-import { UsersService } from '../../../services/users.service';
-import { PuntosService } from '../../../services/puntos.service';
+import { ApiService } from '../../../services/api.service';
+import { SessionService } from '../../../services/session.service';
 import { AuthModalService } from '../../../services/auth-modal.service';
 
 declare var bootstrap: any;
@@ -28,27 +27,23 @@ export class RegisterModal implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('registerModal') modalElement!: ElementRef;
   private modalInstance: any = null;
 
-  form!: FormGroup;
+  loading = false;
   errorMessage = '';
-
-  // Gestión de suscripciones para evitar leaks
+  form!: FormGroup;
   private subs = new Subscription();
 
   constructor(
     private router: Router,
-    private usersService: UsersService,
-    private puntosService: PuntosService,
     private fb: FormBuilder,
+    private apiService: ApiService,
+    private sessionService: SessionService,
     private authModalService: AuthModalService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) { }
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      this.usersService.setUsersEjemplo();
-    }
-
     this.form = this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(4)]]
     });
@@ -56,11 +51,8 @@ export class RegisterModal implements OnInit, AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.subs.add(
         this.authModalService.registerModal$.subscribe((open: boolean) => {
-          if (open) {
-            setTimeout(() => this.openModal(), 50);
-          } else {
-            this.closeModal();
-          }
+          if (open) setTimeout(() => this.openModal(), 50);
+          else this.closeModal();
         })
       );
     }
@@ -68,8 +60,6 @@ export class RegisterModal implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
-
-    // Sincroniza el servicio cuando el usuario cierra con botón X de Bootstrap
     this.modalElement.nativeElement.addEventListener('hidden.bs.modal', () => {
       this.authModalService.closeRegisterModal();
     });
@@ -81,67 +71,43 @@ export class RegisterModal implements OnInit, AfterViewInit, OnDestroy {
 
   openModal(): void {
     if (!isPlatformBrowser(this.platformId) || !this.modalElement) return;
-
     const Bootstrap = getBootstrap();
-    if (!Bootstrap) {
-      console.error('Bootstrap is not loaded');
-      return;
-    }
-
+    if (!Bootstrap) return;
     this.modalInstance = Bootstrap.Modal.getOrCreateInstance(this.modalElement.nativeElement, {
-      backdrop: 'static',
-      keyboard: false
+      backdrop: 'static', keyboard: false
     });
     this.modalInstance.show();
   }
 
   closeModal(): void {
-    if (this.modalInstance) {
-      this.modalInstance.hide();
-    }
+    this.modalInstance?.hide();
     this.errorMessage = '';
     this.form.reset();
   }
 
   submit(): void {
     this.errorMessage = '';
+    if (this.form.invalid) { this.form.markAllAsTouched(); return; }
 
-    if (!isPlatformBrowser(this.platformId)) {
-      this.errorMessage = 'El registro solo está disponible en el navegador.';
-      return;
-    }
-
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
+    this.loading = true;
+    const nombre = (this.form.value.nombre as string).trim();
     const email = (this.form.value.email as string).trim().toLowerCase();
     const password = this.form.value.password as string;
 
-    const created = this.usersService.registerUser
-      ? this.usersService.registerUser(email, password)
-      : null;
-
-    const user = created ?? { email, password };
-
-    if (!created) {
-      this.usersService.addUser(user);
-    }
-
-    this.usersService.setCurrentSession(user);
-    this.puntosService.setUsuarioActual(user.email, this.nombreDesdeEmail(user.email));
-
-    this.authModalService.closeRegisterModal();
-    this.router.navigateByUrl('/perfil');
+    this.apiService.register(nombre, email, password).subscribe({
+      next: (cliente) => {
+        this.sessionService.setSession(cliente);
+        this.authModalService.closeRegisterModal();
+        this.router.navigateByUrl('/perfil').finally(() => { this.loading = false; });
+      },
+      error: (err) => {
+        this.loading = false;
+        this.errorMessage = err.error?.mensaje ?? 'Error al registrar. Inténtalo de nuevo.';
+      }
+    });
   }
 
   switchToLogin(): void {
     this.authModalService.switchToLogin();
-  }
-
-  private nombreDesdeEmail(email: string): string {
-    const base = (email.split('@')[0] || 'Usuario').trim();
-    return base ? base.charAt(0).toUpperCase() + base.slice(1) : 'Usuario';
   }
 }
