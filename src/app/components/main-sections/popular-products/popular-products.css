@@ -1,106 +1,113 @@
-.carrusel-wrapper {
-    position: relative;
-    width: 100%;
+#productos .container {
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.carrusel-overflow {
-    overflow: hidden;
-    width: 100%;
-    padding: 1rem 0 1.5rem 0;
+.carousel-pasteleria {
+ background: transparent;
+  overflow: hidden;
+  position: relative;
 }
 
-.carrusel-track {
-    display: flex;
-    gap: 1.25rem;
-    width: max-content;
-    animation: scrollX 25s linear infinite;
+.carousel-img {
+  height: 420px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  object-fit: cover;
+  object-position: 55% 25%;
+  filter: saturate(1.05) contrast(1.08);
 }
 
-.carrusel-track:hover {
-    animation-play-state: paused;
+.carousel-pasteleria::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 70% 30%, rgba(232, 66, 122, 0.18), rgba(26, 13, 20, 0.65));
+  pointer-events: none;
 }
 
-@keyframes scrollX {
-    0% {
-        transform: translateX(0);
-    }
-
-    100% {
-        transform: translateX(calc(-50% - 0.625rem));
-    }
+.carousel-caption-pasteleria {
+  background: rgba(26, 13, 20, 0.62);
+  border: 1px solid rgba(232, 66, 122, 0.25);
+  box-shadow: 0 6px 18px rgba(232, 66, 122, 0.22);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 20px 24px;
+  text-align: center;
+  color: #f4b8d0;
+  max-width: 560px;
+  margin: 0 auto;
 }
 
-.producto-card {
-    flex: 0 0 240px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.carousel-caption-pasteleria h5 {
+  color: #fce8f0;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
 }
 
-.producto-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(232, 66, 122, 0.25);
-    border-color: rgba(232, 66, 122, 0.35);
+.carousel-caption-pasteleria p {
+  color: #c9a0b4;
+  font-size: 1.05rem;
+  margin-bottom: 14px;
 }
 
-.producto-img-wrap {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.2);
+.btn-pasteleria {
+  background-color: rgba(232, 66, 122, 0.18);
+  color: #fce8f0;
+  border: 1px solid rgba(232, 66, 122, 0.35);
+  box-shadow: 0 4px 12px rgba(232, 66, 122, 0.18);
+  transition: 0.3s ease;
+  border-radius: 999px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
 }
 
-.producto-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.4s ease;
+.btn-pasteleria:hover {
+  background-color: rgba(232, 66, 122, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(232, 66, 122, 0.35);
 }
 
-.producto-card:hover .producto-img {
-    transform: scale(1.07);
+.carousel-pasteleria .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(232, 66, 122, 0.35);
 }
 
-.producto-info {
-    padding: 0.9rem 1rem 1.2rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    text-align: left;
+.carousel-pasteleria .carousel-indicators .active {
+  background-color: rgba(232, 66, 122, 0.85);
 }
 
-.producto-nombre {
-    color: #fce8f0;
-    font-size: 0.92rem;
-    font-weight: 700;
-    margin: 0;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-.producto-precio {
-    color: #e8427a;
-    font-size: 1.05rem;
-    font-weight: 800;
-    letter-spacing: -0.3px;
+.carousel-control-icon-pasteleria {
+  filter: drop-shadow(0 6px 14px rgba(232, 66, 122, 0.35));
+  opacity: 0.9;
 }
 
 @media (max-width: 768px) {
-    .producto-card {
-        flex: 0 0 200px;
-    }
+  .section-title {
+    font-size: 1.5rem;
+  }
 
-    .producto-img-wrap {
-        height: 150px;
-    }
+  .feature-item {
+    margin-bottom: 2rem;
+  }
+
+  .feature-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .carousel-img {
+    height: 300px;
+  }
+
+  .carousel-caption-pasteleria {
+    text-align: center;
+    max-width: 92%;
+  }
 }

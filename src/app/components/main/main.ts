@@ -1,8 +1,6 @@
-import { Component, Inject, PLATFORM_ID, AfterViewInit, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, AfterViewInit } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { ApiService, IProducto } from '../../services/api.service';
 import { SessionService } from '../../services/session.service';
 import { AuthModalService } from '../../services/auth-modal.service';
 
@@ -24,15 +22,10 @@ import { StoreSectionComponent } from '../main-sections/store-section/store-sect
   templateUrl: './main.html',
   styleUrl: './main.css',
 })
-export class Main implements OnInit, OnDestroy, AfterViewInit {
-  productos: IProducto[] = [];
-  cargando = true;
-  error = '';
-  private sub?: Subscription;
+export class Main implements AfterViewInit {
 
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private apiService: ApiService,
     private sessionService: SessionService,
     private authModalService: AuthModalService,
     private router: Router
@@ -44,23 +37,6 @@ export class Main implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.authModalService.openLoginModal('/carta');
     }
-  }
-
-  ngOnInit(): void {
-    this.sub = this.apiService.getProductos({ disponible: true }).subscribe({
-      next: (p) => {
-        this.productos = p.slice(0, 5);
-        this.cargando = false;
-      },
-      error: () => {
-        this.error = 'No se pudieron cargar los productos.';
-        this.cargando = false;
-      }
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.sub?.unsubscribe();
   }
 
   ngAfterViewInit(): void {
