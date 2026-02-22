@@ -24,9 +24,6 @@ import { StoreSectionComponent } from '../main-sections/store-section/store-sect
   templateUrl: './main.html',
   styleUrl: './main.css',
 })
-export class Main implements AfterViewInit {
-
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 export class Main implements OnInit, OnDestroy, AfterViewInit {
   productos: IProducto[] = [];
   cargando = true;
