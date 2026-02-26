@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+import { LocalDbService, IProductoLocal, IClienteLocal, ICompraLocal } from './local-db.service';
+
+// ─── Re-export interfaces (names kept identical so components don't change) ───
 
 export interface ICliente {
     _id: string;
@@ -36,67 +38,115 @@ export interface ICompra {
     fechaCompra: string;
 }
 
+// ─── Helpers ──────────────────────────────────────────────────────────────────
+
+function toCliente(c: IClienteLocal): ICliente {
+    const { passwordHash: _, ...rest } = c as any;
+    return rest as ICliente;
+}
+
+function toProducto(p: IProductoLocal): IProducto {
+    return p as IProducto;
+}
+
+function toCompra(c: ICompraLocal): ICompra {
+    return c as unknown as ICompra;
+}
+
+// ─── Service ──────────────────────────────────────────────────────────────────
+
 @Injectable({ providedIn: 'root' })
 export class ApiService {
-    private readonly base = 'http://localhost:3000/api';
+    constructor(private db: LocalDbService) { }
 
-    constructor(private http: HttpClient) { }
-
+    // ── Auth ───────────────────────────────────────────────────────────────────
 
     login(email: string, password: string): Observable<ICliente> {
-        return this.http.post<ICliente>(`${this.base}/clientes/login`, { email, password });
+        const cliente = this.db.login(email, password);
+        if (!cliente) return throwError(() => ({ error: { mensaje: 'Correo o contraseña incorrectos' } }));
+        return of(toCliente(cliente));
     }
 
     register(nombre: string, email: string, password: string): Observable<ICliente> {
-        return this.http.post<ICliente>(`${this.base}/clientes/register`, { nombre, email, password });
+        const cliente = this.db.register(nombre, email, password);
+        if (!cliente) return throwError(() => ({ error: { mensaje: 'Ya existe un cliente con ese email' } }));
+        return of(toCliente(cliente));
     }
 
+    // ── Clientes ───────────────────────────────────────────────────────────────
 
     getClientes(): Observable<ICliente[]> {
-        return this.http.get<ICliente[]>(`${this.base}/clientes`);
+        return of(this.db.getClientes().map(toCliente));
     }
 
     getCliente(id: string): Observable<ICliente> {
-        return this.http.get<ICliente>(`${this.base}/clientes/${id}`);
+        const c = this.db.getCliente(id);
+        if (!c) return throwError(() => ({ error: { mensaje: 'Cliente no encontrado' } }));
+        return of(toCliente(c));
     }
 
     getClienteConCompras(id: string): Observable<{ cliente: ICliente; compras: ICompra[] }> {
-        return this.http.get<{ cliente: ICliente; compras: ICompra[] }>(`${this.base}/clientes/${id}/compras`);
+        const cliente = this.db.getCliente(id);
+        if (!cliente) return throwError(() => ({ error: { mensaje: 'Cliente no encontrado' } }));
+        const compras = this.db.getComprasByCliente(id).map(c => {
+            // Populate lineas with full producto objects
+            const lineasPobladas = c.lineas.map(l => ({
+                ...l,
+                producto: this.db.getProducto(l.producto) ?? l.producto,
+            }));
+            return { ...toCompra(c), lineas: lineasPobladas } as ICompra;
+        });
+        return of({ cliente: toCliente(cliente), compras });
     }
 
     updateCliente(id: string, datos: Partial<ICliente>): Observable<ICliente> {
-        return this.http.put<ICliente>(`${this.base}/clientes/${id}`, datos);
+        const actualizado = this.db.updateCliente(id, datos as any);
+        if (!actualizado) return throwError(() => ({ error: { mensaje: 'Cliente no encontrado' } }));
+        return of(toCliente(actualizado));
     }
 
+    // ── Productos ──────────────────────────────────────────────────────────────
 
     getProductos(filtros?: { categoria?: string; disponible?: boolean; noCache?: boolean }): Observable<IProducto[]> {
-        let url = `${this.base}/productos`;
-        const params: string[] = [];
-        if (filtros?.categoria) params.push(`categoria=${filtros.categoria}`);
-        if (filtros?.disponible !== undefined) params.push(`disponible=${filtros.disponible}`);
-        if (filtros?.noCache) params.push(`_t=${Date.now()}`); 
-        if (params.length) url += `?${params.join('&')}`;
-        return this.http.get<IProducto[]>(url);
+        return of(this.db.getProductos(filtros).map(toProducto));
     }
 
     getProducto(id: string): Observable<IProducto> {
-        return this.http.get<IProducto>(`${this.base}/productos/${id}`);
+        const p = this.db.getProducto(id);
+        if (!p) return throwError(() => ({ error: { mensaje: 'Producto no encontrado' } }));
+        return of(toProducto(p));
     }
 
+    // ── Compras ────────────────────────────────────────────────────────────────
 
     getCompras(): Observable<ICompra[]> {
-        return this.http.get<ICompra[]>(`${this.base}/compras`);
+        return of(this.db.getCompras().map(toCompra));
     }
 
     getCompra(id: string): Observable<ICompra> {
-        return this.http.get<ICompra>(`${this.base}/compras/${id}`);
+        const c = this.db.getCompra(id);
+        if (!c) return throwError(() => ({ error: { mensaje: 'Compra no encontrada' } }));
+        return of(toCompra(c));
     }
 
     createCompra(data: Partial<ICompra>): Observable<ICompra> {
-        return this.http.post<ICompra>(`${this.base}/compras`, data);
+        const compra = this.db.createCompra({
+            cliente: data.cliente as string,
+            lineas: (data.lineas ?? []).map(l => ({
+                producto: (typeof l.producto === 'string' ? l.producto : (l.producto as IProducto)._id),
+                cantidad: l.cantidad,
+                precioUnitario: l.precioUnitario,
+                subtotal: l.subtotal,
+            })),
+            total: data.total ?? 0,
+            descripcion: data.descripcion,
+        });
+        return of(toCompra(compra));
     }
 
     updateCompra(id: string, data: Partial<ICompra>): Observable<ICompra> {
-        return this.http.put<ICompra>(`${this.base}/compras/${id}`, data);
+        const compra = this.db.getCompra(id);
+        if (!compra) return throwError(() => ({ error: { mensaje: 'Compra no encontrada' } }));
+        return of(toCompra(compra));
     }
 }
